@@ -10,12 +10,6 @@ class KelolaPoli extends Controller
 {
     public function index(Request $request)
     {
-        $query = AdminKelolaPoli::query();
-
-        if ($request->has('search')) {
-            $query->where('nama_poli', 'like', '%' . $request->search . '%');
-        }
-
         $polis = AdminKelolaPoli::orderBy('id', 'desc')->get();
         $total = AdminKelolaPoli::count();
         return view('admin.kelola-poli.index', compact(['polis', 'total']));

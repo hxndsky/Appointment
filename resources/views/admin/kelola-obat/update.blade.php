@@ -339,9 +339,9 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             required>
                                     </div>
                                     <div class="mb-4">
-                                        <label for="keterangan"
-                                            class="block text-gray-800 dark:text-neutral-400">Keterangan</label>
-                                            <textarea id="keterangan" name="keterangan" class="mt-2 px-4 py-2 w-full border rounded-lg" rows="4">{{ $obats->kemasan }}</textarea>
+                                        <label for="kemasan"
+                                            class="block text-gray-800 dark:text-neutral-400">Kemasan</label>
+                                            <textarea id="kemasan" name="kemasan" class="mt-2 px-4 py-2 w-full border rounded-lg" rows="4">{{ $obats->kemasan }}</textarea>
                                     </div>
                                     <div class="mb-4">
                                         <label for="harga" class="block text-gray-800 dark:text-neutral-400">Harga</label>
