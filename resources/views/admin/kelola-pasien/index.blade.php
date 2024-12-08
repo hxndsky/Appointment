@@ -1,6 +1,6 @@
 @extends('layouts.app')
-<!-- ADMIN || KELOLA POLI -->
-@section('title', 'Kelola Poli')
+<!-- ADMIN || KELOLA PASIEN -->
+@section('title', 'Kelola Pasien')
 @section('content')
     <!-- Breadcrumb -->
     <div
@@ -33,7 +33,7 @@
                     </svg>
                 </li>
                 <li class="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                    Kelola Poli
+                    Kelola Pasien
                 </li>
             </ol>
             <!-- End Breadcrumb -->
@@ -310,22 +310,22 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Kelola Poli
+                                        Kelola Pasien
                                     </h2>
                                     <p class="text-sm text-gray-600 dark:text-neutral-400">
-                                        Tambah poli, edit, dan hapus poli
+                                        Tambah pasien, edit, dan hapus pasien
                                     </p>
 
                                 </div>
 
                                 <div>
                                     <div class="py-3 px-4 inline-flex gap-x-2">
-                                        <form action="{{ route('admin.kelola-poli.index') }}" method="GET">
+                                        <form action="{{ route('admin.kelola-pasien.index') }}" method="GET">
                                             <div class="relative max-w-xs w-full">
                                                 <label for="hs-table-search" class="sr-only">Search</label>
                                                 <input type="text" name="search" id="hs-table-search"
                                                     class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                    placeholder="Cari nama poli..." value="{{ request('search') }}">
+                                                    placeholder="Cari nama pasien..." value="{{ request('search') }}">
                                                 <div
                                                     class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
                                                     <svg class="size-4 text-gray-400 dark:text-neutral-500"
@@ -340,7 +340,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                         </form>
 
                                         <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                                            href={{ route('admin.kelola-poli.create') }}>
+                                            href={{ route('admin.kelola-pasien.create') }}>
                                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
                                                 width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -348,7 +348,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                                 <path d="M5 12h14" />
                                                 <path d="M12 5v14" />
                                             </svg>
-                                            Tambah Poli
+                                            Tambah Pasien
                                         </a>
 
                                     </div>
@@ -375,12 +375,27 @@ dark:bg-neutral-800 dark:border-neutral-700"
 
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Nama Poli
+                                            Nama Pasien
                                         </th>
 
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Keterangan
+                                            Alamat
+                                        </th>
+
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            No. KTP
+                                        </th>
+
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            No. HP
+                                        </th>
+
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            No. Rekam Medis
                                         </th>
 
                                         <th scope="col"
@@ -389,7 +404,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                    @forelse ($polis as $poli)
+                                    @forelse ($pasiens as $pasien)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
@@ -397,19 +412,31 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->nama_poli }}
+                                                {{ $pasien->nama }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->keterangan }}
+                                                {{ $pasien->alamat }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $pasien->no_ktp }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $pasien->no_hp }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $pasien->no_rm }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
                                                 <a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20 dark:focus:bg-blue-800/20"
-                                                    href="{{ route('admin.kelola-poli.edit', ['id' => $poli->id]) }}">
+                                                    href="{{ route('admin.kelola-pasien.edit', ['id' => $pasien->id]) }}">
                                                     Edit
                                                 </a>
-                                                <a href="{{ route('admin.kelola-poli.delete', ['id' => $poli->id]) }}"
+                                                <a href="{{ route('admin.kelola-pasien.delete', ['id' => $pasien->id]) }}"
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
                                                     class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-none focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:bg-red-800/30 dark:hover:bg-red-800/20 dark:focus:bg-red-800/20">
                                                     Hapus
@@ -422,7 +449,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                         <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                Data poli tidak ada
+                                                Data pasien tidak ada
                                             </td>
                                         </tr>
                                     @endforelse

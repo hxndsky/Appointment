@@ -38,8 +38,16 @@ Route::middleware(['auth', 'AdminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     // DOKTER
     Route::get('/admin/kelola-dokter', [KelolaDokter::class, 'index'])->name('admin.kelola-dokter.index');
+
+
     // PASIEN
     Route::get('/admin/kelola-pasien', [KelolaPasien::class, 'index'])->name('admin.kelola-pasien.index');
+    Route::get('/admin/kelola-pasien/create', [KelolaPasien::class, 'create'])->name('admin.kelola-pasien.create');
+    Route::post('/admin/kelola-pasien', [KelolaPasien::class, 'save'])->name('admin.kelola-pasien.save');
+    Route::get('/admin/kelola-pasien/edit/{id}', [KelolaPasien::class, 'edit'])->name('admin.kelola-pasien.edit');
+    Route::put('/admin/kelola-pasien/edit/{id}', [KelolaPasien::class, 'update'])->name('admin.kelola-pasien.update');
+    Route::get('/admin/kelola-pasien/delete/{id}', [KelolaPasien::class, 'delete'])->name('admin.kelola-pasien.delete');
+
     // POLI
     Route::get('/admin/kelola-poli', [KelolaPoli::class, 'index'])->name('admin.kelola-poli.index');
     Route::get('/admin/kelola-poli/create', [KelolaPoli::class, 'create'])->name('admin.kelola-poli.create');
@@ -47,6 +55,7 @@ Route::middleware(['auth', 'AdminMiddleware'])->group(function () {
     Route::get('/admin/kelola-poli/edit/{id}', [KelolaPoli::class, 'edit'])->name('admin.kelola-poli.edit');
     Route::put('/admin/kelola-poli/edit/{id}', [KelolaPoli::class, 'update'])->name('admin.kelola-poli.update');
     Route::get('/admin/kelola-poli/delete/{id}', [KelolaPoli::class, 'delete'])->name('admin.kelola-poli.delete');
+
     // OBAT
     Route::get('/admin/kelola-obat', [KelolaObat::class, 'index'])->name('admin.kelola-obat.index');
     Route::get('/admin/kelola-obat/create', [KelolaObat::class, 'create'])->name('admin.kelola-obat.create');

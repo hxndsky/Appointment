@@ -1,6 +1,6 @@
 @extends('layouts.app')
-<!-- ADMIN || KELOLA POLI -->
-@section('title', 'Tambah Data Poli')
+<!-- ADMIN || KELOLA PASIEN -->
+@section('title', 'Tambah Data Pasien')
 @section('content')
     <!-- Breadcrumb -->
     <div
@@ -310,7 +310,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Tambah Data Poli
+                                        Tambah Data Pasien
                                     </h2>
                                     @if (Session::has('error'))
                                         <div class="mt-2 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
@@ -326,24 +326,39 @@ dark:bg-neutral-800 dark:border-neutral-700"
 
                             <!-- Table -->
                             <div class="p-4 overflow-y-auto">
-                                <form action="{{ route('admin.kelola-poli.save') }}" method="POST">
+                                <form action="{{ route('admin.kelola-pasien.save') }}" method="POST">
                                     @csrf
                                     <div class="mb-4">
-                                        <label for="nama_poli" class="block text-gray-800 dark:text-neutral-400">Nama
-                                            Poli</label>
-                                        <input type="text" id="nama_poli" name="nama_poli"
-                                            class="mt-2 px-4 py-2 w-full border rounded-lg" required placeholder="Nama Poli">
+                                        <label for="nama" class="block text-gray-800 dark:text-neutral-400">Nama
+                                            Pasien</label>
+                                        <input type="text" id="nama" name="nama"
+                                            class="mt-2 px-4 py-2 w-full border rounded-lg" required placeholder="Nama Pasien">
                                     </div>
                                     <div class="mb-4">
-                                        <label for="keterangan"
-                                            class="block text-gray-800 dark:text-neutral-400">Keterangan</label>
-                                        <textarea id="keterangan" name="keterangan" class="mt-2 px-4 py-2 w-full border rounded-lg" rows="4" placeholder="Keterangan"></textarea>
+                                        <label for="alamat"
+                                            class="block text-gray-800 dark:text-neutral-400">Alamat</label>
+                                        <textarea id="alamat" name="alamat" class="mt-2 px-4 py-2 w-full border rounded-lg" rows="4" placeholder="Alamat"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="no_ktp" class="block text-gray-800 dark:text-neutral-400">No. KTP</label>
+                                        <input type="number" id="no_ktp" name="no_ktp"
+                                            class="mt-2 px-4 py-2 w-full border rounded-lg" required placeholder="No. KTP">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="no_hp" class="block text-gray-800 dark:text-neutral-400">No. HP</label>
+                                        <input type="number" id="no_hp" name="no_hp"
+                                            class="mt-2 px-4 py-2 w-full border rounded-lg" required placeholder="No. HP">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="no_rm" class="block text-gray-800 dark:text-neutral-400">No. Rekam Medis</label>
+                                        <input type="text" id="no_rm" name="no_rm"
+                                            class="mt-2 px-4 py-2 w-full border rounded-lg" required placeholder="No. Rekam Medis">
                                     </div>
                                     <div
                                         class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
                                         <a type="button"
                                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                            href={{ route('admin.kelola-poli.index') }}>
+                                            href={{ route('admin.kelola-pasien.index') }}>
                                             Go Back
                                         </a>
                                         <button type="submit"
