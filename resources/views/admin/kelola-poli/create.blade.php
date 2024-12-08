@@ -57,7 +57,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
             <div class="px-6 pt-4">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-2xl inline-block font-bold focus:outline-none focus:opacity-80"
-                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
+                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
                     aria-label="Preline">
                     <h1>POLI<span class="text-blue-600">KLINIK</span></h1>
                 </a>
@@ -71,7 +71,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                     <ul class="flex flex-col space-y-1">
                         <li>
                             <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white"
-                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}">
+                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
@@ -332,12 +332,12 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                         <label for="nama_poli" class="block text-gray-800 dark:text-neutral-400">Nama
                                             Poli</label>
                                         <input type="text" id="nama_poli" name="nama_poli"
-                                            class="mt-2 px-4 py-2 w-full border rounded-lg" required placeholder="Nama Poli">
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" required placeholder="Nama Poli">
                                     </div>
                                     <div class="mb-4">
                                         <label for="keterangan"
                                             class="block text-gray-800 dark:text-neutral-400">Keterangan</label>
-                                        <textarea id="keterangan" name="keterangan" class="mt-2 px-4 py-2 w-full border rounded-lg" rows="4" placeholder="Keterangan"></textarea>
+                                        <textarea id="keterangan" name="keterangan" class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" rows="4" placeholder="Keterangan"></textarea>
                                     </div>
                                     <div
                                         class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">

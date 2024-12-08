@@ -57,7 +57,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
             <div class="px-6 pt-4">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-2xl inline-block font-bold focus:outline-none focus:opacity-80"
-                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
+                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
                     aria-label="Preline">
                     <h1>POLI<span class="text-blue-600">KLINIK</span></h1>
                 </a>
@@ -71,7 +71,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                     <ul class="flex flex-col space-y-1">
                         <li>
                             <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white"
-                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}">
+                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
@@ -335,20 +335,20 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             <input type="text" id="nama_obat"
                                             name="nama_obat"
                                             value="{{ $obats->nama_obat }}"
-                                            class="mt-2 px-4 py-2 w-full border rounded-lg"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg"
                                             required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="kemasan"
                                             class="block text-gray-800 dark:text-neutral-400">Kemasan</label>
-                                            <textarea id="kemasan" name="kemasan" class="mt-2 px-4 py-2 w-full border rounded-lg" rows="4">{{ $obats->kemasan }}</textarea>
+                                            <textarea id="kemasan" name="kemasan" class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" rows="4">{{ $obats->kemasan }}</textarea>
                                     </div>
                                     <div class="mb-4">
                                         <label for="harga" class="block text-gray-800 dark:text-neutral-400">Harga</label>
                                             <input type="text" id="harga"
                                             name="harga"
                                             value="{{ $obats->harga }}"
-                                            class="mt-2 px-4 py-2 w-full border rounded-lg"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg"
                                             required>
                                     </div>
                                     <div

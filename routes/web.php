@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\KelolaObat;
 use App\Http\Controllers\Admin\KelolaPasien;
 use App\Http\Controllers\Admin\KelolaPoli;
 use App\Http\Controllers\Dokter\DokterController;
-use App\Http\Controllers\ProfileController;
+//use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -35,7 +35,14 @@ Route::middleware(['auth', 'PasienMiddleware'])->group(function () {
 
 // ADMIN ROUTES
 Route::middleware(['auth', 'AdminMiddleware'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    // DASHBOARD
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard.index');
+    Route::get('/admin/dashboard/create', [AdminController::class, 'create'])->name('admin.dashboard.create');
+    Route::post('/admin/dashboard', [AdminController::class, 'save'])->name('admin.dashboard.save');
+    Route::get('/admin/dashboard/edit/{id}', [AdminController::class, 'edit'])->name('admin.dashboard.edit');
+    Route::put('/admin/dashboard/edit/{id}', [AdminController::class, 'update'])->name('admin.dashboard.update');
+    Route::get('/admin/dashboard/delete/{id}', [AdminController::class, 'delete'])->name('admin.dashboard.delete');
+
     // DOKTER
     Route::get('/admin/kelola-dokter', [KelolaDokter::class, 'index'])->name('admin.kelola-dokter.index');
 

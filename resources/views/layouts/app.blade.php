@@ -72,7 +72,7 @@
             <div class="me-5 lg:me-0 lg:hidden">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-2xl inline-block font-bold focus:outline-none focus:opacity-80"
-                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard') : (Auth::user()->role == 'dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
+                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
                     aria-label="Preline">
                     <h1>POLI<span class="text-blue-600">KLINIK</span></h1>
                 </a>

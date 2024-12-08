@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if ($request->user()->role == "Admin") {
-            return redirect(route('admin.dashboard'));
+            return redirect(route('admin.dashboard.index'));
         } else if($request->user()->role == "Dokter"){
             return redirect(route('dokter.dashboard'));
         }

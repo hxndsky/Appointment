@@ -1,6 +1,6 @@
 @extends('layouts.app')
-<!-- ADMIN || KELOLA PASIEN -->
-@section('title', 'Kelola Pasien')
+<!-- ADMIN || KELOLA PENGGUNA -->
+@section('title', 'Tambah Data Pengguna')
 @section('content')
     <!-- Breadcrumb -->
     <div
@@ -33,7 +33,7 @@
                     </svg>
                 </li>
                 <li class="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                    Kelola Pasien
+                    Dashboard {{ Auth::user()->role }}
                 </li>
             </ol>
             <!-- End Breadcrumb -->
@@ -310,151 +310,90 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Kelola Pasien
+                                        Tambah Data Pengguna
                                     </h2>
-                                    <p class="text-sm text-gray-600 dark:text-neutral-400">
-                                        Tambah pasien, edit, dan hapus pasien
-                                    </p>
-
+                                    @if (Session::has('error'))
+                                        <div class="mt-2 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
+                                            role="alert" tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
+                                            {{ Session::get('error') }}
+                                        </div>
+                                    @endif
                                 </div>
 
-                                <div>
-                                    <div class="py-3 px-4 inline-flex gap-x-2">
-                                        <form action="{{ route('admin.kelola-pasien.index') }}" method="GET">
-                                            <div class="relative max-w-xs w-full">
-                                                <label for="hs-table-search" class="sr-only">Search</label>
-                                                <input type="text" name="search" id="hs-table-search"
-                                                    class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                    placeholder="Cari nama pasien..." value="{{ request('search') }}">
-                                                <div
-                                                    class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
-                                                    <svg class="size-4 text-gray-400 dark:text-neutral-500"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="11" cy="11" r="8"></circle>
-                                                        <path d="m21 21-4.3-4.3"></path>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </form>
 
-                                        <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                                            href={{ route('admin.kelola-pasien.create') }}>
-                                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="M5 12h14" />
-                                                <path d="M12 5v14" />
-                                            </svg>
-                                            Tambah Pasien
-                                        </a>
-
-                                    </div>
-                                </div>
-                                {{-- 
-                                @if (Session::has('success'))
-                                    <div class="w-full mt-4 bg-teal-100 border border-teal-200 text-sm text-teal-800 rounded-lg p-4 dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500" role="alert" tabindex="-1" aria-labelledby="hs-soft-color-success-label">
-                                        {{ Session::get('success') }}
-                                    </div>
-                                @endif
-                                 --}}
                             </div>
-
                             <!-- End Header -->
 
                             <!-- Table -->
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No.
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Nama Pasien
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Alamat
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No. KTP
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No. HP
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No. Rekam Medis
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                    @forelse ($pasiens as $pasien)
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $loop->iteration }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pasien->nama }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pasien->alamat }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pasien->no_ktp }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pasien->no_hp }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pasien->no_rm }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                <a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20 dark:focus:bg-blue-800/20"
-                                                    href="{{ route('admin.kelola-pasien.edit', ['id' => $pasien->id]) }}">
-                                                    Edit
-                                                </a>
-                                                <a href="{{ route('admin.kelola-pasien.delete', ['id' => $pasien->id]) }}"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                                                    class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-none focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:bg-red-800/30 dark:hover:bg-red-800/20 dark:focus:bg-red-800/20">
-                                                    Hapus
-                                                </a>
-
-
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                Data pasien tidak ada
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                            <div class="p-4 overflow-y-auto">
+                                <form action="{{ route('admin.dashboard.save') }}" method="POST">
+                                    @csrf
+                                    <div class="mb-4">
+                                        <label for="name" class="block text-gray-800 dark:text-neutral-400">Nama
+                                            Pengguna</label>
+                                        <input type="text" id="name" name="name"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" required
+                                            placeholder="Nama Pengguna">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="email" class="block text-gray-800 dark:text-neutral-400">Email</label>
+                                        <input type="email" id="email" name="email"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" required
+                                            placeholder="Email">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="alamat"
+                                            class="block text-gray-800 dark:text-neutral-400">Alamat</label>
+                                        <textarea id="alamat" name="alamat" class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg"
+                                            rows="4" placeholder="Alamat"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="no_ktp" class="block text-gray-800 dark:text-neutral-400">No.
+                                            KTP</label>
+                                        <input type="number" id="no_ktp" name="no_ktp"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" required
+                                            placeholder="No. KTP">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="no_hp" class="block text-gray-800 dark:text-neutral-400">No.
+                                            HP</label>
+                                        <input type="number" id="no_hp" name="no_hp"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" required
+                                            placeholder="No. HP">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="password" class="block text-gray-800 dark:text-neutral-400">Password</label>
+                                        <input type="password" id="password" name="password"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" required
+                                            placeholder="Password">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="role" class="block text-gray-800 dark:text-neutral-400">Role</label>
+                                        <select id="role" name="role" required
+                                            class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                            <option value="" disabled selected>Pilih Role</option>
+                                            <option value="Admin">
+                                                Admin</option>
+                                            <option value="Dokter">
+                                                Dokter</option>
+                                            <option value="Pasien">
+                                                Pasien</option>
+                                        </select>
+                                    </div>
+                                    <div
+                                        class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                                        <a type="button"
+                                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                                            href={{ route('admin.dashboard.index') }}>
+                                            Go Back
+                                        </a>
+                                        <button type="submit"
+                                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                                            Simpan
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                             <!-- End Table -->
                         </div>
                     </div>

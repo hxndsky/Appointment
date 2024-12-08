@@ -335,13 +335,13 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             <input type="text" id="nama_poli"
                                             name="nama_poli"
                                             value="{{ $polis->nama_poli }}"
-                                            class="mt-2 px-4 py-2 w-full border rounded-lg"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg"
                                             required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="keterangan"
                                             class="block text-gray-800 dark:text-neutral-400">Keterangan</label>
-                                            <textarea id="keterangan" name="keterangan" class="mt-2 px-4 py-2 w-full border rounded-lg" rows="4">{{ $polis->keterangan }}</textarea>
+                                            <textarea id="keterangan" name="keterangan" class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" rows="4">{{ $polis->keterangan }}</textarea>
                                     </div>
                                     <div
                                         class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
