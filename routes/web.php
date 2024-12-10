@@ -37,15 +37,14 @@ Route::middleware(['auth', 'PasienMiddleware'])->group(function () {
 Route::middleware(['auth', 'AdminMiddleware'])->group(function () {
     // DASHBOARD
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard.index');
-    Route::get('/admin/dashboard/create', [AdminController::class, 'create'])->name('admin.dashboard.create');
-    Route::post('/admin/dashboard', [AdminController::class, 'save'])->name('admin.dashboard.save');
-    Route::get('/admin/dashboard/edit/{id}', [AdminController::class, 'edit'])->name('admin.dashboard.edit');
-    Route::put('/admin/dashboard/edit/{id}', [AdminController::class, 'update'])->name('admin.dashboard.update');
-    Route::get('/admin/dashboard/delete/{id}', [AdminController::class, 'delete'])->name('admin.dashboard.delete');
 
     // DOKTER
     Route::get('/admin/kelola-dokter', [KelolaDokter::class, 'index'])->name('admin.kelola-dokter.index');
-
+    Route::get('/admin/kelola-dokter/create', [KelolaDokter::class, 'create'])->name('admin.kelola-dokter.create');
+    Route::post('/admin/kelola-dokter', [KelolaDokter::class, 'save'])->name('admin.kelola-dokter.save');
+    Route::get('/admin/kelola-dokter/edit/{id}', [KelolaDokter::class, 'edit'])->name('admin.kelola-dokter.edit');
+    Route::put('/admin/kelola-dokter/edit/{id}', [KelolaDokter::class, 'update'])->name('admin.kelola-dokter.update');
+    Route::get('/admin/kelola-dokter/delete/{id}', [KelolaDokter::class, 'delete'])->name('admin.kelola-dokter.delete');
 
     // PASIEN
     Route::get('/admin/kelola-pasien', [KelolaPasien::class, 'index'])->name('admin.kelola-pasien.index');
@@ -74,5 +73,5 @@ Route::middleware(['auth', 'AdminMiddleware'])->group(function () {
 
 // DOKTER ROUTES
 Route::middleware(['auth', 'DokterMiddleware'])->group(function () {
-    Route::get('/dokter/dashboard', [DokterController::class, 'index'])->name('dokter.dashboard');
+    Route::get('/dokter/dashboard', [DokterController::class, 'index'])->name('dokter.dashboard.index');
 });

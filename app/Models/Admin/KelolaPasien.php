@@ -2,21 +2,28 @@
 
 namespace App\Models\Admin;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class KelolaPasien extends Model
+class KelolaPasien extends Authenticatable
 {
-    use HasFactory;
+    use Notifiable;
 
     protected $table = 'pasien';
 
     protected $fillable = [
         'nama',
+        'email',
         'alamat',
         'no_ktp',
         'no_hp',
         'no_rm',
+        'role',
+        'password',
     ];
-    
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
-<!-- ADMIN || KELOLA POLI -->
-@section('title', 'Tambah Data Poli')
+<!-- ADMIN || KELOLA DOKTER -->
+@section('title', 'Tambah Data Dokter')
 @section('content')
     <!-- Breadcrumb -->
     <div
@@ -57,7 +57,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
             <div class="px-6 pt-4">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-2xl inline-block font-bold focus:outline-none focus:opacity-80"
-                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
+                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard.index') : route('dashboard')) }}"
                     aria-label="Preline">
                     <h1>POLI<span class="text-blue-600">KLINIK</span></h1>
                 </a>
@@ -71,7 +71,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                     <ul class="flex flex-col space-y-1">
                         <li>
                             <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white"
-                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}">
+                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard.index') : route('dashboard')) }}">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
@@ -128,12 +128,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Dokter
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -177,12 +172,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Pasien
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
 
                                 </ul>
                             </div>
@@ -229,12 +219,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Poli
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -280,12 +265,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Obat
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -310,7 +290,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Tambah Data Poli
+                                        Tambah Data Dokter
                                     </h2>
                                     @if (Session::has('error'))
                                         <div class="mt-2 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
@@ -326,33 +306,85 @@ dark:bg-neutral-800 dark:border-neutral-700"
 
                             <!-- Table -->
                             <div class="p-4 overflow-y-auto">
-                                <form action="{{ route('admin.kelola-poli.save') }}" method="POST">
+                                <form action="{{ route('admin.kelola-dokter.save') }}" method="POST">
                                     @csrf
+
+                                    <!-- Nama Dokter -->
                                     <div class="mb-4">
-                                        <label for="nama_poli" class="block text-gray-800 dark:text-neutral-400">Nama
-                                            Poli</label>
-                                        <input type="text" id="nama_poli" name="nama_poli"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" required placeholder="Nama Poli">
+                                        <label for="nama" class="block text-gray-800 dark:text-neutral-400">Nama
+                                            Dokter</label>
+                                        <input type="text" id="nama" name="nama" value="{{ old('nama') }}"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                            placeholder="Masukkan nama dokter" required>
                                     </div>
+
+                                    <!-- Email -->
                                     <div class="mb-4">
-                                        <label for="keterangan"
-                                            class="block text-gray-800 dark:text-neutral-400">Keterangan</label>
-                                        <textarea id="keterangan" name="keterangan" class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg" rows="4" placeholder="Keterangan"></textarea>
+                                        <label for="email"
+                                            class="block text-gray-800 dark:text-neutral-400">Email</label>
+                                        <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                            placeholder="Masukkan email dokter" required>
                                     </div>
-                                    <div
-                                        class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
-                                        <a type="button"
-                                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                            href={{ route('admin.kelola-poli.index') }}>
-                                            Go Back
-                                        </a>
+
+                                    <!-- Alamat -->
+                                    <div class="mb-4">
+                                        <label for="alamat"
+                                            class="block text-gray-800 dark:text-neutral-400">Alamat</label>
+                                        <textarea id="alamat" name="alamat"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                            rows="4" placeholder="Masukkan alamat dokter" required>{{ old('alamat') }}</textarea>
+                                    </div>
+
+                                    <!-- No. HP -->
+                                    <div class="mb-4">
+                                        <label for="no_hp" class="block text-gray-800 dark:text-neutral-400">No.
+                                            HP</label>
+                                        <input type="number" id="no_hp" name="no_hp" value="{{ old('no_hp') }}"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                            placeholder="Masukkan nomor HP dokter" required>
+                                    </div>
+
+                                    <!-- Poli -->
+                                    <div class="mb-4">
+                                        <label for="id_poli"
+                                            class="block text-gray-800 dark:text-neutral-400">Poli</label>
+                                        <select id="id_poli" name="id_poli" required
+                                            class="mt-2 py-2 px-4 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
+                                            <option value="" disabled selected>Pilih Poli</option>
+                                            @foreach ($polis as $poli)
+                                                <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="mb-4">
+                                        <label for="password"
+                                            class="block text-gray-800 dark:text-neutral-400">Password</label>
+                                        <input type="password" id="password" name="password"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                            placeholder="Masukkan password" required>
+                                    </div>
+
+                                    <!-- Konfirmasi Password -->
+                                    <div class="mb-4">
+                                        <label for="password_confirmation"
+                                            class="block text-gray-800 dark:text-neutral-400">Konfirmasi Password</label>
+                                        <input type="password" id="password_confirmation" name="password_confirmation"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                            placeholder="Ulangi password" required>
+                                    </div>
+
+                                    <div class="flex justify-end gap-2">
+                                        <a href="{{ route('admin.kelola-dokter.index') }}"
+                                            class="py-2 px-4 text-sm font-medium border bg-white text-gray-800 rounded-lg">Kembali</a>
                                         <button type="submit"
-                                            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                                            Simpan
-                                        </button>
+                                            class="py-2 px-4 text-sm font-medium text-white bg-blue-600 rounded-lg">Simpan</button>
                                     </div>
                                 </form>
                             </div>
+
                             <!-- End Table -->
                         </div>
                     </div>

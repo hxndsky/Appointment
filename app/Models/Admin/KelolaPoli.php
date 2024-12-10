@@ -15,4 +15,9 @@ class KelolaPoli extends Model
         'nama_poli',
         'keterangan',
     ];
+
+    public function dokters()
+    {
+        return $this->hasMany(KelolaDokter::class, 'id_poli');
+    }
 }

@@ -35,17 +35,7 @@ return new class extends Migration
             $table->string('alamat', 255)->nullable();
             $table->integer('no_hp')->nullable(false);
             $table->foreignId('id_poli')->constrained('poli')->onDelete('cascade');
-            $table->timestamps();
-        });
-
-        // Tabel Pasien
-        Schema::create('pasien', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama', 150)->nullable(false);
-            $table->string('alamat', 255)->nullable(false);
-            $table->unsignedInteger('no_ktp')->nullable(false);
-            $table->unsignedInteger('no_hp')->nullable(false);
-            $table->char('no_rm', 10)->nullable();
+            $table->string('role')->default('Dokter');
             $table->timestamps();
         });
 

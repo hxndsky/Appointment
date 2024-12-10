@@ -57,7 +57,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
             <div class="px-6 pt-4">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-2xl inline-block font-bold focus:outline-none focus:opacity-80"
-                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
+                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard.index') : route('dashboard')) }}"
                     aria-label="Preline">
                     <h1>POLI<span class="text-blue-600">KLINIK</span></h1>
                 </a>
@@ -71,7 +71,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                     <ul class="flex flex-col space-y-1">
                         <li>
                             <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white"
-                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}">
+                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard.index') : route('dashboard')) }}">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
@@ -128,12 +128,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Dokter
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -177,12 +172,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Pasien
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
 
                                 </ul>
                             </div>
@@ -229,12 +219,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Poli
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -280,12 +265,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Obat
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -501,54 +481,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
                                         Semua Pengguna
                                     </h2>
-                                    <p class="text-sm text-gray-600 dark:text-neutral-400">
-                                        Edit dan hapus pengguna
-                                    </p>
-
                                 </div>
-
-                                <div>
-                                    <div class="py-3 px-4 inline-flex gap-x-2">
-                                        <form action="{{ route('admin.dashboard.index') }}" method="GET">
-                                            <div class="relative max-w-xs w-full">
-                                                <label for="hs-table-search" class="sr-only">Search</label>
-                                                <input type="text" name="search" id="hs-table-search"
-                                                    class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                    placeholder="Cari nama pengguna..." value="{{ request('search') }}">
-                                                <div
-                                                    class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
-                                                    <svg class="size-4 text-gray-400 dark:text-neutral-500"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="11" cy="11" r="8"></circle>
-                                                        <path d="m21 21-4.3-4.3"></path>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                                            href={{ route('admin.dashboard.create') }}>
-                                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="M5 12h14" />
-                                                <path d="M12 5v14" />
-                                            </svg>
-                                            Tambah Pengguna
-                                        </a>
-
-                                    </div>
-                                </div>
-                                {{-- 
-                                @if (Session::has('success'))
-                                    <div class="w-full mt-4 bg-teal-100 border border-teal-200 text-sm text-teal-800 rounded-lg p-4 dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500" role="alert" tabindex="-1" aria-labelledby="hs-soft-color-success-label">
-                                        {{ Session::get('success') }}
-                                    </div>
-                                @endif
-                                 --}}
                             </div>
 
                             <!-- End Header -->
@@ -591,14 +524,10 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
                                             Role
                                         </th>
-
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                    @forelse ($penggunas as $pengguna)
+                                    @forelse ($users as $user)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
@@ -606,53 +535,40 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pengguna->name }}
+                                                {{ $user->nama }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pengguna->email }}
+                                                {{ $user->email }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pengguna->alamat }}
+                                                {{ $user->alamat }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pengguna->no_ktp }}
+                                                {{ $user->no_ktp }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pengguna->no_hp }}
+                                                {{ $user->no_hp }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $pengguna->role }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                <a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20 dark:focus:bg-blue-800/20"
-                                                    href="{{ route('admin.dashboard.edit', ['id' => $pengguna->id]) }}">
-                                                    Edit
-                                                </a>
-                                                <a href="{{ route('admin.dashboard.delete', ['id' => $pengguna->id]) }}"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                                                    class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-none focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:bg-red-800/30 dark:hover:bg-red-800/20 dark:focus:bg-red-800/20">
-                                                    Hapus
-                                                </a>
-
-
+                                                {{ $user->role }}
                                             </td>
                                         </tr>
                                     @empty
                                         <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                            <td colspan="8"
+                                                class="px-6 py-4 text-center text-sm font-medium text-gray-800 dark:text-neutral-200">
                                                 Data pengguna tidak ada
                                             </td>
                                         </tr>
                                     @endforelse
                                 </tbody>
                             </table>
+
                             <!-- End Table -->
                         </div>
                     </div>

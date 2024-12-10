@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('pasien', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nama', 150)->nullable(false);
             $table->string('email')->unique();
-            $table->string('alamat');
-            $table->string('no_ktp');
-            $table->string('no_hp');
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('alamat', 255)->nullable(false);
+            $table->unsignedInteger('no_ktp')->nullable(false);
+            $table->unsignedInteger('no_hp')->nullable(false);
+            $table->char('no_rm', 10)->nullable();
             $table->string('password');
+            $table->enum('role', ['Pasien', 'Admin', 'Dokter'])->default('Pasien');
             $table->rememberToken();
             $table->timestamps();
         });

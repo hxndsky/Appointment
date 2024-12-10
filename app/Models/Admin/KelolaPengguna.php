@@ -9,10 +9,11 @@ class KelolaPengguna extends Model
 {
     use HasFactory;
 
-    protected $table = 'users';
+    protected $table = 'pasien';
+    
 
     protected $fillable = [
-        'name',
+        'nama',
         'email',
         'alamat',
         'no_ktp',

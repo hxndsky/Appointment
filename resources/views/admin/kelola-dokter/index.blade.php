@@ -1,6 +1,6 @@
 @extends('layouts.app')
-<!-- ADMIN || KELOLA POLI -->
-@section('title', 'Kelola Poli')
+<!-- ADMIN || KELOLA DOKTER -->
+@section('title', 'Kelola Dokter')
 @section('content')
     <!-- Breadcrumb -->
     <div
@@ -33,7 +33,7 @@
                     </svg>
                 </li>
                 <li class="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                    Kelola Poli
+                    Kelola Dokter
                 </li>
             </ol>
             <!-- End Breadcrumb -->
@@ -57,7 +57,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
             <div class="px-6 pt-4">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-2xl inline-block font-bold focus:outline-none focus:opacity-80"
-                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
+                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard.index') : route('dashboard')) }}"
                     aria-label="Preline">
                     <h1>POLI<span class="text-blue-600">KLINIK</span></h1>
                 </a>
@@ -71,7 +71,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                     <ul class="flex flex-col space-y-1">
                         <li>
                             <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white"
-                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}">
+                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard.index') : route('dashboard')) }}">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
@@ -128,12 +128,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Dokter
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -177,12 +172,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Pasien
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
 
                                 </ul>
                             </div>
@@ -229,12 +219,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Poli
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -280,12 +265,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             Kelola Obat
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href="#">
-                                            Link 2
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </li>
@@ -310,22 +290,22 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Kelola Poli
+                                        Kelola Dokter
                                     </h2>
                                     <p class="text-sm text-gray-600 dark:text-neutral-400">
-                                        Tambah poli, edit, dan hapus poli
+                                        Tambah dokter, edit, dan hapus dokter
                                     </p>
 
                                 </div>
 
                                 <div>
                                     <div class="py-3 px-4 inline-flex gap-x-2">
-                                        <form action="{{ route('admin.kelola-poli.index') }}" method="GET">
+                                        <form action="{{ route('admin.kelola-dokter.index') }}" method="GET">
                                             <div class="relative max-w-xs w-full">
                                                 <label for="hs-table-search" class="sr-only">Search</label>
                                                 <input type="text" name="search" id="hs-table-search"
                                                     class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                    placeholder="Cari nama poli..." value="{{ request('search') }}">
+                                                    placeholder="Cari nama dokter..." value="{{ request('search') }}">
                                                 <div
                                                     class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
                                                     <svg class="size-4 text-gray-400 dark:text-neutral-500"
@@ -340,7 +320,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                         </form>
 
                                         <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                                            href={{ route('admin.kelola-poli.create') }}>
+                                            href={{ route('admin.kelola-dokter.create') }}>
                                             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
                                                 width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -348,7 +328,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                                 <path d="M5 12h14" />
                                                 <path d="M12 5v14" />
                                             </svg>
-                                            Tambah Poli
+                                            Tambah Dokter
                                         </a>
 
                                     </div>
@@ -372,24 +352,30 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
                                             No.
                                         </th>
-
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Nama Poli
+                                            Nama Dokter
                                         </th>
-
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Keterangan
+                                            Alamat
                                         </th>
-
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            No. HP
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Poli
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                    @forelse ($polis as $poli)
+                                    @forelse ($dokters as $dokter)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
@@ -397,37 +383,46 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->nama_poli }}
+                                                {{ $dokter->nama }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->keterangan }}
+                                                {{ $dokter->alamat }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                <a class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20 dark:focus:bg-blue-800/20"
-                                                    href="{{ route('admin.kelola-poli.edit', ['id' => $poli->id]) }}">
-                                                    Edit
-                                                </a>
-                                                <a href="{{ route('admin.kelola-poli.delete', ['id' => $poli->id]) }}"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                                                    class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-none focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:bg-red-800/30 dark:hover:bg-red-800/20 dark:focus:bg-red-800/20">
-                                                    Hapus
-                                                </a>
-
-
+                                                {{ $dokter->no_hp }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $dokter->poli->nama_poli ?? '-' }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                <div class="flex gap-2">
+                                                    <a href="{{ route('admin.kelola-dokter.edit', $dokter->id) }}"
+                                                        class="py-2 px-4 inline-flex items-center text-sm font-medium rounded-lg border bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20">
+                                                        Edit
+                                                    </a>
+                                                    <a href="{{ route('admin.kelola-dokter.delete', $dokter->id) }}"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
+                                                        class="py-2 px-4 inline-flex items-center text-sm font-medium rounded-lg border bg-red-100 text-red-800 hover:bg-red-200 focus:outline-none dark:text-red-500 dark:bg-red-800/30 dark:hover:bg-red-800/20">
+                                                        Hapus
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                Data poli tidak ada
+                                            <td colspan="6"
+                                                class="px-6 py-4 text-center text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                Data dokter tidak ada
                                             </td>
                                         </tr>
                                     @endforelse
                                 </tbody>
                             </table>
+
                             <!-- End Table -->
                         </div>
                     </div>

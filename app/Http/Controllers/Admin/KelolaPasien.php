@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\KelolaPasien as AdminKelolaPasien;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class KelolaPasien extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $pasiens = AdminKelolaPasien::orderBy('id', 'desc')->get();
-        $total = AdminKelolaPasien::count();
-        return view('admin.kelola-pasien.index', compact(['pasiens', 'total']));
+        $pasiens = AdminKelolaPasien::where('role', 'Pasien')->get();
+        return view('admin.kelola-pasien.index', compact('pasiens'));
     }
 
     public function create()
@@ -22,63 +22,92 @@ class KelolaPasien extends Controller
 
     public function save(Request $request)
     {
-        $validation = $request->validate([
+        $validated = $request->validate([
             'nama' => 'required|max:150',
+            'email' => 'required|email|unique:pasien,email',
             'alamat' => 'required|max:255',
-            'no_ktp' => 'required',
-            'no_hp' => 'required',
-            'no_rm' => 'required',
+            'no_ktp' => 'required|numeric|unique:pasien,no_ktp',
+            'no_hp' => 'required|numeric',
+            'password' => 'required|min:8|confirmed',
         ]);
 
-        $data = AdminKelolaPasien::create($validation);
-        if ($data) {
-            session()->flash('success', 'Pasien Berhasil Ditambahkan');
-            return redirect(route('admin.kelola-pasien.index'));
+        // Generate No RM menggunakan format yang diminta
+        $validated['no_rm'] = $this->generateNoRm();
+
+        // Enkripsi password dan tetapkan role sebagai "Pasien"
+        $validated['password'] = Hash::make($validated['password']);
+        $validated['role'] = 'Pasien';
+
+        $pasiens = AdminKelolaPasien::create($validated);
+
+        if ($pasiens) {
+            session()->flash('success', 'Pasien berhasil ditambahkan dengan No. Rekam Medis: ' . $validated['no_rm']);
         } else {
-            session()->flash('error', 'Pasien Gagal Ditambahkan');
-            return redirect(route('admin.kelola-pasien.create'));
+            session()->flash('error', 'Pasien gagal ditambahkan.');
         }
+
+        return redirect()->route('admin.kelola-pasien.index');
     }
 
     public function edit($id)
     {
         $pasiens = AdminKelolaPasien::findOrFail($id);
-        return view('admin.kelola-pasien.update', compact('pasiens'));
+        return view('admin.kelola-pasien.edit', compact('pasiens'));
     }
- 
-    public function delete($id)
-    {
-        $pasiens = AdminKelolaPasien::findOrFail($id)->delete();
-        if ($pasiens) {
-            session()->flash('success', 'Pasien Berhasil Dihapus');
-            return redirect(route('admin.kelola-pasien.index'));
-        } else {
-            session()->flash('error', 'Pasien Gagal Dihapus');
-            return redirect(route('admin.kelola-pasien.index'));
-        }
-    }
- 
+
     public function update(Request $request, $id)
     {
         $pasiens = AdminKelolaPasien::findOrFail($id);
-        $nama = $request->nama;
-        $alamat = $request->alamat;
-        $no_ktp = $request->no_ktp;
-        $no_hp = $request->no_hp;
-        $no_rm = $request->no_rm;
- 
-        $pasiens->nama = $nama;
-        $pasiens->alamat = $alamat;
-        $pasiens->no_ktp = $no_ktp;
-        $pasiens->no_hp = $no_hp;
-        $pasiens->no_rm = $no_rm;
-        $data = $pasiens->save();
-        if ($data) {
-            session()->flash('success', 'Pasien Berhasil Diupdate');
-            return redirect(route('admin.kelola-pasien.index'));
+
+        $validated = $request->validate([
+            'nama' => 'required|max:150',
+            'email' => 'required|email|unique:pasien,email,' . $id,
+            'alamat' => 'required|max:255',
+            'no_ktp' => 'required|numeric|unique:pasien,no_ktp,' . $id,
+            'no_hp' => 'required|numeric',
+            'password' => 'nullable|min:8|confirmed',
+        ]);
+
+        // Perbarui password hanya jika diisi
+        if ($request->filled('password')) {
+            $validated['password'] = Hash::make($request->password);
         } else {
-            session()->flash('error', 'Pasien Gagal Diupdate');
-            return redirect(route('admin.kelola-pasien.update'));
+            unset($validated['password']); // Jangan ubah password jika kosong
         }
+
+        $updated = $pasiens->update($validated);
+
+        if ($updated) {
+            session()->flash('success', 'Pasien berhasil diperbarui.');
+        } else {
+            session()->flash('error', 'Pasien gagal diperbarui.');
+        }
+
+        return redirect()->route('admin.kelola-pasien.index');
+    }
+
+    public function delete($id)
+    {
+        $pasiens = AdminKelolaPasien::findOrFail($id);
+        $deleted = $pasiens->delete();
+
+        if ($deleted) {
+            session()->flash('success', 'Pasien berhasil dihapus.');
+        } else {
+            session()->flash('error', 'Pasien gagal dihapus.');
+        }
+
+        return redirect()->route('admin.kelola-pasien.index');
+    }
+
+    /**
+     * Generate a unique No. Rekam Medis (No. RM) berdasarkan bulan dan tahun.
+     *
+     * @return string
+     */
+    private function generateNoRm(): string
+    {
+        $jumlahPasien = AdminKelolaPasien::where('role', 'Pasien')->count();
+        return now()->format('Ym') . '-' . ($jumlahPasien + 1);
     }
 }
