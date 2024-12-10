@@ -181,6 +181,41 @@
         });
     </script>
 
+<script>
+    const passwordInput = document.getElementById('password');
+    const togglePasswordButton = document.getElementById('toggle-password');
+    const togglePasswordIcon = document.getElementById('toggle-password-icon');
+
+    togglePasswordButton.addEventListener('click', () => {
+        const isPasswordVisible = passwordInput.type === 'text';
+        passwordInput.type = isPasswordVisible ? 'password' : 'text';
+        togglePasswordIcon.setAttribute(
+            'd',
+            isPasswordVisible ?
+            'M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z' // Replace with eye-open path
+            :
+            'M15 12l.011-.011M12...' // Replace with eye-close path
+        );
+    });
+</script>
+<script>
+    const confirmationPasswordInput = document.getElementById('password_confirmation');
+    const toggleConfirmationPasswordButton = document.getElementById('toggle-password_confirmation');
+    const toggleConfirmationPasswordIcon = document.getElementById('toggle-password_confirmation-icon');
+
+    toggleConfirmationPasswordButton.addEventListener('click', () => {
+        const isPasswordVisible = confirmationPasswordInput.type === 'text';
+        confirmationPasswordInput.type = isPasswordVisible ? 'password' : 'text';
+        toggleConfirmationPasswordIcon.setAttribute(
+            'd',
+            isPasswordVisible ?
+            'M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z' // Replace with eye-open path
+            :
+            'M15 12l.011-.011M12...' // Replace with eye-close path
+        );
+    });
+</script>
+
     <script>
         window.addEventListener("load", () => {
             (function() {

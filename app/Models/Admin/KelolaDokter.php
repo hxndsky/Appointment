@@ -21,6 +21,8 @@ class KelolaDokter extends Authenticatable
         'role',
     ];
 
+    protected $rememberToken = true;
+
     protected $hidden = [
         'password',
         'remember_token',

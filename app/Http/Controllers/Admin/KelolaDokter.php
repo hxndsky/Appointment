@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\KelolaDokter as AdminKelolaDokter;
 use App\Models\Admin\KelolaPoli;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,17 +27,32 @@ class KelolaDokter extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|max:150',
-            'email' => 'required|email|unique:dokter,email',
+            'email' => 'required|email|unique:dokter,email|unique:pasien,email',
             'alamat' => 'required|max:255',
             'no_hp' => 'required|numeric',
             'id_poli' => 'required|exists:poli,id',
             'password' => 'required|min:8|confirmed',
         ]);
 
+        // Hash password
         $validated['password'] = Hash::make($validated['password']);
         $validated['role'] = 'Dokter';
 
+        // Simpan data ke tabel dokter
         $dokters = AdminKelolaDokter::create($validated);
+
+        // Simpan data ke tabel pasien untuk autentikasi
+        $pasienData = [
+            'nama' => $validated['nama'],
+            'email' => $validated['email'],
+            'alamat' => $validated['alamat'],
+            'no_ktp' => 0, // Default atau sesuaikan dengan kebutuhan
+            'no_hp' => $validated['no_hp'],
+            'no_rm' => null, // Tidak digunakan untuk dokter
+            'password' => $validated['password'],
+            'role' => 'Dokter',
+        ];
+        User::create($pasienData);
 
         if ($dokters) {
             session()->flash('success', 'Dokter berhasil ditambahkan.');
@@ -56,29 +72,38 @@ class KelolaDokter extends Controller
 
     public function update(Request $request, $id)
     {
-        $dokter = AdminKelolaDokter::findOrFail($id);
+        $dokters = AdminKelolaDokter::findOrFail($id);
 
-        // Validasi
         $validated = $request->validate([
             'nama' => 'required|max:150',
-            'email' => 'required|email|unique:dokter,email,' . $id,
+            'email' => 'required|email|unique:dokter,email,' . $id . '|unique:pasien,email,' . $id,
             'alamat' => 'required|max:255',
             'no_hp' => 'required|numeric',
-            'id_poli' => 'required|exists:poli,id',//
-            'password' => 'nullable|min:8|confirmed', // Password tidak wajib
+            'id_poli' => 'required|exists:poli,id',
+            'password' => 'nullable|min:8|confirmed',
         ]);
 
-        // Hanya mengupdate password jika field password diisi
         if ($request->filled('password')) {
             $validated['password'] = Hash::make($validated['password']);
         } else {
-            unset($validated['password']); // Jangan ubah password jika tidak diisi
+            unset($validated['password']);
         }
 
-        // Update data
-        $updated = $dokter->update($validated);
+        // Update tabel dokter
+        $updated = $dokters->update($validated);
 
-        // Flash message
+        // Update tabel pasien untuk autentikasi
+        $pasiens = User::where('email', $dokters->email)->first();
+        if ($pasiens) {
+            $pasiens->update([
+                'nama' => $validated['nama'],
+                'email' => $validated['email'],
+                'alamat' => $validated['alamat'],
+                'no_hp' => $validated['no_hp'],
+                'password' => $validated['password'] ?? $pasiens->password, // Update password jika diisi
+            ]);
+        }
+
         if ($updated) {
             session()->flash('success', 'Dokter berhasil diperbarui.');
         } else {
@@ -88,11 +113,16 @@ class KelolaDokter extends Controller
         return redirect()->route('admin.kelola-dokter.index');
     }
 
-
     public function delete($id)
     {
         $dokters = AdminKelolaDokter::findOrFail($id);
         $deleted = $dokters->delete();
+
+        // Hapus juga data di tabel pasien yang terkait
+        $pasiens = User::where('email', $dokters->email)->first();
+        if ($pasiens) {
+            $pasiens->delete();
+        }
 
         if ($deleted) {
             session()->flash('success', 'Dokter berhasil dihapus.');

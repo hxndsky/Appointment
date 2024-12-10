@@ -32,10 +32,13 @@ return new class extends Migration
         Schema::create('dokter', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 150)->nullable(false);
+            $table->string('email')->unique();
             $table->string('alamat', 255)->nullable();
             $table->integer('no_hp')->nullable(false);
             $table->foreignId('id_poli')->constrained('poli')->onDelete('cascade');
+            $table->string('password');
             $table->string('role')->default('Dokter');
+            $table->rememberToken();
             $table->timestamps();
         });
 

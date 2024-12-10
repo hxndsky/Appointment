@@ -73,5 +73,5 @@ Route::middleware(['auth', 'AdminMiddleware'])->group(function () {
 
 // DOKTER ROUTES
 Route::middleware(['auth', 'DokterMiddleware'])->group(function () {
-    Route::get('/dokter/dashboard', [DokterController::class, 'index'])->name('dokter.dashboard.index');
+    Route::get('/dokter/dashboard', [DokterController::class, 'index'])->name('dokter.dashboard');
 });

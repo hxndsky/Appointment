@@ -57,7 +57,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
             <div class="px-6 pt-4">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-2xl inline-block font-bold focus:outline-none focus:opacity-80"
-                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard.index') : route('dashboard')) }}"
+                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
                     aria-label="Preline">
                     <h1>POLI<span class="text-blue-600">KLINIK</span></h1>
                 </a>
@@ -353,41 +353,91 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             placeholder="No. HP" required>
                                     </div>
 
-                                    <!-- Field Password -->
                                     <div class="mb-4">
                                         <label for="password"
                                             class="block text-gray-800 dark:text-neutral-400">Password</label>
-                                        <input type="password" id="password" name="password"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Password" required>
+                                        <div class="relative">
+                                            <input type="password" id="password" name="password"
+                                                class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                                placeholder="Masukkan password" required>
+                                            <button type="button" id="toggle-password"
+                                                class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
+                                                <svg id="toggle-password-icon" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" class="w-5 h-5">
+                                                    <path class="hs-password-active:hidden"
+                                                        d="M9.88 9.88a3 3 0 1 0 4.24 4.24">
+                                                    </path>
+                                                    <path class="hs-password-active:hidden"
+                                                        d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68">
+                                                    </path>
+                                                    <path class="hs-password-active:hidden"
+                                                        d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61">
+                                                    </path>
+                                                    <line class="hs-password-active:hidden" x1="2" x2="22"
+                                                        y1="2" y2="22"></line>
+                                                    <path class="hidden hs-password-active:block"
+                                                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                                    <circle class="hidden hs-password-active:block" cx="12"
+                                                        cy="12" r="3"></circle>
+                                                </svg>
+                                            </button>
+                                        </div>
+
                                     </div>
 
-                                    <!-- Field Password Confirmation -->
+
+                                    <!-- Konfirmasi Password -->
                                     <div class="mb-4">
                                         <label for="password_confirmation"
                                             class="block text-gray-800 dark:text-neutral-400">Konfirmasi Password</label>
-                                        <input type="password" id="password_confirmation" name="password_confirmation"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Konfirmasi Password" required>
+                                        <div class="relative">
+                                            <input type="password" id="password_confirmation"
+                                                name="password_confirmation"
+                                                class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                                placeholder="Ulangi password" required>
+                                            <button type="button" id="toggle-password_confirmation"
+                                                class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
+                                                <svg id="toggle-password_confirmation-icon"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                                    <path class="hs-password-active:hidden"
+                                                        d="M9.88 9.88a3 3 0 1 0 4.24 4.24">
+                                                    </path>
+                                                    <path class="hs-password-active:hidden"
+                                                        d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68">
+                                                    </path>
+                                                    <path class="hs-password-active:hidden"
+                                                        d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61">
+                                                    </path>
+                                                    <line class="hs-password-active:hidden" x1="2" x2="22"
+                                                        y1="2" y2="22"></line>
+                                                    <path class="hidden hs-password-active:block"
+                                                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                                    <circle class="hidden hs-password-active:block" cx="12"
+                                                        cy="12" r="3"></circle>
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
 
-                                    <!-- Field No. RM -->
-                                    <div class="mb-4">
-                                        <label for="no_rm" class="block text-gray-800 dark:text-neutral-400">Nomor
-                                            Rekam Medis</label>
-                                        <input type="text" id="no_rm" name="no_rm"
-                                            value="{{ now()->format('Ym') . '-' . (App\Models\Admin\KelolaPasien::where('role', 'Pasien')->count() + 1) }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg bg-gray-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            readonly>
-                                    </div>
+                                        <!-- Field No. RM -->
+                                        <div class="mb-4">
+                                            <label for="no_rm" class="block text-gray-800 dark:text-neutral-400">Nomor
+                                                Rekam Medis</label>
+                                            <input type="text" id="no_rm" name="no_rm"
+                                                value="{{ now()->format('Ym') . '-' . (App\Models\Admin\KelolaPasien::where('role', 'Pasien')->count() + 1) }}"
+                                                class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg bg-gray-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                                readonly>
+                                        </div>
 
-                                    <!-- Buttons -->
-                                    <div class="flex justify-end gap-2">
-                                        <a href="{{ route('admin.kelola-pasien.index') }}"
-                                            class="py-2 px-4 text-sm font-medium border bg-white text-gray-800 rounded-lg">Kembali</a>
-                                        <button type="submit"
-                                            class="py-2 px-4 text-sm font-medium text-white bg-blue-600 rounded-lg">Simpan</button>
-                                    </div>
+                                        <!-- Buttons -->
+                                        <div class="flex justify-end gap-2">
+                                            <a href="{{ route('admin.kelola-pasien.index') }}"
+                                                class="py-2 px-4 text-sm font-medium border bg-white text-gray-800 rounded-lg">Kembali</a>
+                                            <button type="submit"
+                                                class="py-2 px-4 text-sm font-medium text-white bg-blue-600 rounded-lg">Simpan</button>
+                                        </div>
                                 </form>
                             </div>
 
