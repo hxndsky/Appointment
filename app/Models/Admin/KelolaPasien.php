@@ -26,4 +26,9 @@ class KelolaPasien extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function poli()
+    {
+        return $this->belongsTo(KelolaPoli::class, 'id_poli');
+    }
 }
