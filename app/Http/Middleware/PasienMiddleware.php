@@ -11,10 +11,6 @@ class PasienMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role === 'Pasien') {
-            return $next($request);
-        }
-
-        abort(403, 'Akses ditolak.');
+        return $next($request);
     }
 }

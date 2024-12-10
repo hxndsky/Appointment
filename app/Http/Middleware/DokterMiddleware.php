@@ -11,10 +11,6 @@ class DokterMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role === 'Dokter') {
-            return $next($request);
-        }
-
-        abort(403, 'Akses ditolak.');
+        return $next($request);
     }
 }

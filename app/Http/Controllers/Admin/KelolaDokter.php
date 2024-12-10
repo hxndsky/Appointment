@@ -64,7 +64,7 @@ class KelolaDokter extends Controller
             'email' => 'required|email|unique:dokter,email,' . $id,
             'alamat' => 'required|max:255',
             'no_hp' => 'required|numeric',
-            'id_poli' => 'required|exists:poli,id',
+            'id_poli' => 'required|exists:poli,id',//
             'password' => 'nullable|min:8|confirmed', // Password tidak wajib
         ]);
 

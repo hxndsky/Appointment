@@ -13,12 +13,17 @@ class KelolaDokter extends Authenticatable
 
     protected $fillable = [
         'nama',
+        'email',
         'alamat',
         'no_hp',
         'id_poli',
-        'email',
-        'password', // Pastikan kolom ini ada di tabel
+        'password',
         'role',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
     /**

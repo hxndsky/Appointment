@@ -26,11 +26,9 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('admin.dashboard.index');
         } elseif ($request->user()->role === 'Dokter') {
             return redirect()->route('dokter.dashboard.index');
-        } elseif ($request->user()->role === 'Pasien') {
-            return redirect()->route('dashboard');
         }
 
-        return redirect('/');
+        return redirect()->intended(route('dashboard'));
     }
 
     public function destroy(Request $request): RedirectResponse
