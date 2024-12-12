@@ -35,11 +35,15 @@ class LoginRequest extends FormRequest
         $user = User::where('nama', $this->login_type)->orWhere('no_hp', $this->login_type)->first()
             ?? KelolaDokter::where('nama', $this->login_type)->orWhere('no_hp', $this->login_type)->first();
 
-        if (!$user || !Hash::check($this->password, $user->password)) {
-            RateLimiter::hit($this->throttleKey());
-
+        if (!$user) {
             throw ValidationException::withMessages([
-                'login_type' => trans('auth.failed'),
+                'login_type' => 'Nama atau No HP tidak ditemukan.',
+            ]);
+        }
+
+        if (!Hash::check($this->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'password' => 'Password yang Anda masukkan salah.',
             ]);
         }
 

@@ -280,86 +280,86 @@ dark:bg-neutral-800 dark:border-neutral-700"
     <!-- Content -->
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-           <!-- Grid -->
-           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <!-- Card -->
-            <div
-                class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-                <div class="p-4 md:p-5">
-                    <div class="flex items-center gap-x-2">
-                        <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-                            Total Dokter
-                        </p>
-                        
-                    </div>
+            <!-- Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <!-- Card -->
+                <div
+                    class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+                    <div class="p-4 md:p-5">
+                        <div class="flex items-center gap-x-2">
+                            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+                                Total Dokter
+                            </p>
 
-                    <div class="mt-1 flex items-center gap-x-2">
-                        <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                            {{ $totalDokter }} Dokter
-                        </h3>
+                        </div>
+
+                        <div class="mt-1 flex items-center gap-x-2">
+                            <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
+                                {{ $totalDokter }} Dokter
+                            </h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- End Card -->
+                <!-- End Card -->
 
-            <!-- Card -->
-            <div
-                class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-                <div class="p-4 md:p-5">
-                    <div class="flex items-center gap-x-2">
-                        <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-                            Total Pasien
-                        </p>
-                    </div>
+                <!-- Card -->
+                <div
+                    class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+                    <div class="p-4 md:p-5">
+                        <div class="flex items-center gap-x-2">
+                            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+                                Total Pasien
+                            </p>
+                        </div>
 
-                    <div class="mt-1 flex items-center gap-x-2">
-                        <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                            {{ $totalPasien }} Pasien
-                        </h3>
-                    </div>
-                </div>
-            </div>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <div
-                class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-                <div class="p-4 md:p-5">
-                    <div class="flex items-center gap-x-2">
-                        <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-                            Total Poli
-                        </p>
-                    </div>
-
-                    <div class="mt-1 flex items-center gap-x-2">
-                        <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                            {{ $totalPoli }} Poli
-                        </h3>
+                        <div class="mt-1 flex items-center gap-x-2">
+                            <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
+                                {{ $totalPasien }} Pasien
+                            </h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- End Card -->
+                <!-- End Card -->
 
-            <!-- Card -->
-            <div
-                class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-                <div class="p-4 md:p-5">
-                    <div class="flex items-center gap-x-2">
-                        <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-                            Total Pengguna
-                        </p>
-                    </div>
+                <!-- Card -->
+                <div
+                    class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+                    <div class="p-4 md:p-5">
+                        <div class="flex items-center gap-x-2">
+                            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+                                Total Poli
+                            </p>
+                        </div>
 
-                    <div class="mt-1 flex items-center gap-x-2">
-                        <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-                            {{ $totalUser }} Pengguna
-                        </h3>
+                        <div class="mt-1 flex items-center gap-x-2">
+                            <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
+                                {{ $totalPoli }} Poli
+                            </h3>
+                        </div>
                     </div>
                 </div>
+                <!-- End Card -->
+
+                <!-- Card -->
+                <div
+                    class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+                    <div class="p-4 md:p-5">
+                        <div class="flex items-center gap-x-2">
+                            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+                                Total Obat
+                            </p>
+                        </div>
+
+                        <div class="mt-1 flex items-center gap-x-2">
+                            <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
+                                {{ $totalObat }} Obat
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Card -->
             </div>
-            <!-- End Card -->
-        </div>
-        <!-- End Grid -->
+            <!-- End Grid -->
 
             <!-- Card -->
             <div class="flex flex-col">
@@ -558,69 +558,116 @@ dark:bg-neutral-800 dark:border-neutral-700"
                             class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
                             <!-- Header -->
                             <div
-                                class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
-                                <div>
-                                    <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Poli
-                                    </h2>
-                                </div>
+                                class="px-6 py-4 flex flex-col gap-3 md:flex-row md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
+                                <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                                    Data Poli
+                                </h2>
                             </div>
-
                             <!-- End Header -->
 
                             <!-- Table -->
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No.
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Nama Poli
-                                        </th>
-
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Keterangan
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                    @forelse ($polis as $poli)
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $loop->iteration }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->nama_poli }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->keterangan }}
-                                            </td>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                No.
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                Nama Poli
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                                Keterangan
+                                            </th>
                                         </tr>
-                                    @empty
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                                            <td colspan="8"
-                                                class="px-6 py-4 text-center text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                Data pengguna tidak ada
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                                        @forelse ($polis as $poli)
+                                            <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                    {{ $loop->iteration + ($polis->currentPage() - 1) * $polis->perPage() }}
+                                                </td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                    {{ $poli->nama_poli }}
+                                                </td>
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                    {{ $poli->keterangan }}
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
+                                                <td colspan="3"
+                                                    class="px-6 py-4 text-center text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                    Data poli tidak tersedia.
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
                             <!-- End Table -->
+
+                            <!-- Pagination and Info -->
+                            <div class="flex justify-between items-center px-6 py-4">
+                                <!-- Display Info -->
+                                <div class="text-sm text-gray-600 dark:text-neutral-400">
+                                    Menampilkan
+                                    {{ ($polis->currentPage() - 1) * $polis->perPage() + 1 }}-
+                                    {{ min($polis->currentPage() * $polis->perPage(), $polis->total()) }}
+                                    dari {{ $polis->total() }} data
+                                </div>
+
+                                <!-- Pagination -->
+                                @if ($polis->hasPages())
+                                    <nav class="flex items-center gap-x-1" aria-label="Pagination">
+                                        <!-- Previous Button -->
+                                        <a href="{{ $polis->previousPageUrl() }}"
+                                            class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-transparent dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10 {{ $polis->onFirstPage() ? 'disabled' : '' }}"
+                                            aria-label="Previous">
+                                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="m15 18-6-6 6-6"></path>
+                                            </svg>
+                                        </a>
+
+                                        <!-- Page Numbers -->
+                                        @foreach ($polis->links()->elements[0] as $page => $url)
+                                            <a href="{{ $url }}"
+                                                class="min-h-[38px] min-w-[38px] flex justify-center items-center border border-gray-200 text-gray-800 py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-gray-50 {{ $polis->currentPage() == $page ? 'bg-gray-200' : 'hover:bg-gray-100 dark:border-neutral-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10' }}"
+                                                aria-current="{{ $polis->currentPage() == $page ? 'page' : '' }}">
+                                                {{ $page }}
+                                            </a>
+                                        @endforeach
+
+                                        <!-- Next Button -->
+                                        <a href="{{ $polis->nextPageUrl() }}"
+                                            class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-transparent dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10 {{ $polis->hasMorePages() ? '' : 'disabled' }}"
+                                            aria-label="Next">
+                                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="m9 18 6-6-6-6"></path>
+                                            </svg>
+                                        </a>
+                                    </nav>
+                                @endif
+                            </div>
+                            <!-- End Pagination and Info -->
                         </div>
                     </div>
                 </div>
             </div>
             <!-- End Card -->
+
         </div>
     </div>
 @endsection

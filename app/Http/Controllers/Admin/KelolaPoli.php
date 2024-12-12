@@ -40,27 +40,15 @@ class KelolaPoli extends Controller
     public function edit($id)
     {
         $polis = AdminKelolaPoli::findOrFail($id);
-        return view('admin.kelola-poli.update', compact('polis'));
+        return view('admin.kelola-poli.edit', compact('polis'));
     }
- 
-    public function delete($id)
-    {
-        $polis = AdminKelolaPoli::findOrFail($id)->delete();
-        if ($polis) {
-            session()->flash('success', 'Poli Berhasil Dihapus');
-            return redirect(route('admin.kelola-poli.index'));
-        } else {
-            session()->flash('error', 'Poli Gagal Dihapus');
-            return redirect(route('admin.kelola-poli.index'));
-        }
-    }
- 
+
     public function update(Request $request, $id)
     {
         $polis = AdminKelolaPoli::findOrFail($id);
         $nama_poli = $request->nama_poli;
         $keterangan = $request->keterangan;
- 
+
         $polis->nama_poli = $nama_poli;
         $polis->keterangan = $keterangan;
         $data = $polis->save();
@@ -70,6 +58,18 @@ class KelolaPoli extends Controller
         } else {
             session()->flash('error', 'Poli Gagal Diupdate');
             return redirect(route('admin.kelola-poli.update'));
+        }
+    }
+
+    public function delete($id)
+    {
+        $polis = AdminKelolaPoli::findOrFail($id)->delete();
+        if ($polis) {
+            session()->flash('success', 'Poli Berhasil Dihapus');
+            return redirect(route('admin.kelola-poli.index'));
+        } else {
+            session()->flash('error', 'Poli Gagal Dihapus');
+            return redirect(route('admin.kelola-poli.index'));
         }
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 
 class KelolaDokter extends Authenticatable
 {
@@ -34,5 +35,10 @@ class KelolaDokter extends Authenticatable
     public function poli()
     {
         return $this->belongsTo(KelolaPoli::class, 'id_poli');
+    }
+
+    public function pasien()
+    {
+        return $this->hasOne(User::class, 'email', 'email');
     }
 }

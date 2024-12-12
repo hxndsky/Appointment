@@ -72,39 +72,42 @@ class KelolaDokter extends Controller
 
     public function update(Request $request, $id)
     {
+        // Temukan data dokter berdasarkan ID
         $dokters = AdminKelolaDokter::findOrFail($id);
 
+        // Validasi input
         $validated = $request->validate([
             'nama' => 'required|max:150',
-            'email' => 'required|email|unique:dokter,email,' . $id . '|unique:pasien,email,' . $id,
+            'email' => 'required|email|unique:dokter,email,' . $id, // Hanya cek di tabel dokter
             'alamat' => 'required|max:255',
             'no_hp' => 'required|numeric',
-            'id_poli' => 'required|exists:poli,id',
+            'id_poli' => 'required|exists:poli,id', // id_poli hanya untuk tabel dokter
             'password' => 'nullable|min:8|confirmed',
         ]);
 
+        // Hash password jika diberikan
         if ($request->filled('password')) {
             $validated['password'] = Hash::make($validated['password']);
         } else {
             unset($validated['password']);
         }
 
-        // Update tabel dokter
-        $updated = $dokters->update($validated);
+        // Update data pada tabel dokter
+        $updatedDokter = $dokters->update($validated);
 
-        // Update tabel pasien untuk autentikasi
+        // Sinkronisasi data pada tabel pasien
         $pasiens = User::where('email', $dokters->email)->first();
         if ($pasiens) {
             $pasiens->update([
                 'nama' => $validated['nama'],
-                'email' => $validated['email'],
                 'alamat' => $validated['alamat'],
                 'no_hp' => $validated['no_hp'],
-                'password' => $validated['password'] ?? $pasiens->password, // Update password jika diisi
+                'password' => $validated['password'] ?? $pasiens->password, // Perbarui password jika diisi
             ]);
         }
 
-        if ($updated) {
+        // Tampilkan pesan berhasil/gagal
+        if ($updatedDokter) {
             session()->flash('success', 'Dokter berhasil diperbarui.');
         } else {
             session()->flash('error', 'Dokter gagal diperbarui.');
@@ -112,6 +115,7 @@ class KelolaDokter extends Controller
 
         return redirect()->route('admin.kelola-dokter.index');
     }
+
 
     public function delete($id)
     {

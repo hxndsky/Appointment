@@ -47,7 +47,7 @@ class KelolaObat extends Controller
     public function edit($id)
     {
         $obats = AdminKelolaObat::findOrFail($id);
-        return view('admin.kelola-obat.update', compact('obats'));
+        return view('admin.kelola-obat.edit', compact('obats'));
     }
  
     public function delete($id)

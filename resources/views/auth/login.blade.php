@@ -72,10 +72,10 @@
                                 <input type="text" id="login_type" name="login_type"
                                     class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                     required aria-describedby="email-error" placeholder="Nama atau No HP">
-
                             </div>
-                            <p class="hidden text-xs text-red-600 mt-2" id="email-error">Masukkan Nama atau No HP yang
-                                valid.</p>
+                            @error('login_type')
+                                <p class="text-xs text-red-600 mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         <!-- End Form Group -->
 
@@ -111,8 +111,11 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="hidden text-xs text-red-600 mt-2" id="password-error">Minimal 8 karakter</p>
+                            @error('password')
+                                <p class="text-xs text-red-600 mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
+
                         <!-- End Form Group -->
 
                         <!-- Checkbox -->

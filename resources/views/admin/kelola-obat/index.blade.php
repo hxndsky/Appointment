@@ -390,7 +390,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $obat->harga }}
+                                                Rp {{ $obat->harga }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
