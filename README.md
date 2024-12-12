@@ -1,5 +1,5 @@
 # Appointment
-#### Saya menggunakan Laravel Herd untuk pembuatan project, namun saya berikan tutorial pembuatan secara manual
+Saya menggunakan Laravel Herd untuk pembuatan project, namun saya berikan tutorial pembuatan secara manual
 
 ## How to
 1. Create project 
