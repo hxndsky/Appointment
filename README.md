@@ -36,7 +36,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=db_poli
 DB_USERNAME=root
-DB_PASSWORD=
+DB_PASSWORD=adminroot (kosongkan jika db tidak menggunakan password)
 ```
 6. Ganti APP_URL pada .env
 ```
