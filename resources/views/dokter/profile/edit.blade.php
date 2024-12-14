@@ -1,10 +1,10 @@
 @extends('layouts.app')
-<!-- ADMIN || KELOLA DOKTER -->
-@section('title', 'Tambah Data Dokter')
+<!-- DOKTER -->
+@section('title', 'Dashboard')
 @section('content')
     <!-- Breadcrumb -->
     <div
-        class="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 lg:hidden dark:bg-neutral-800 dark:border-neutral-700">
+        class="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 lg:px-8 lg:hidden dark:bg-neutral-800 dark:border-neutral-700">
         <div class="flex items-center py-2">
             <!-- Navigation Toggle -->
             <button type="button"
@@ -33,7 +33,7 @@
                     </svg>
                 </li>
                 <li class="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                    Tambah Data Dokter
+                    Data Diri Dokter
                 </li>
             </ol>
             <!-- End Breadcrumb -->
@@ -57,7 +57,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
             <div class="px-6 pt-4">
                 <!-- Logo -->
                 <a class="flex-none rounded-md text-2xl inline-block font-bold focus:outline-none focus:opacity-80"
-                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}"
+                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard.index') : route('dashboard')) }}"
                     aria-label="Preline">
                     <h1>POLI<span class="text-blue-600">KLINIK</span></h1>
                 </a>
@@ -70,8 +70,8 @@ dark:bg-neutral-800 dark:border-neutral-700"
                 <nav class="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
                     <ul class="flex flex-col space-y-1">
                         <li>
-                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white"
-                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard') : route('dashboard')) }}">
+                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white"
+                                href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.index') : (Auth::user()->role == 'Dokter' ? route('dokter.dashboard.index') : route('dashboard')) }}">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round">
@@ -101,7 +101,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                     <path d="m14.3 16.6 1-.4" />
                                     <path d="m20.7 13.8 1-.4" />
                                 </svg>
-                                Dokter
+                                Periksa
 
                                 <svg class="hs-accordion-active:block ms-auto hidden size-4"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -124,26 +124,29 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 <ul class="ps-8 pt-1 space-y-1">
                                     <li>
                                         <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href={{ route('admin.kelola-dokter.index') }}>
-                                            Kelola Dokter
+                                            href="#">
+                                            Jadwal Periksa
                                         </a>
                                     </li>
-
+                                    <li>
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
+                                            href="#">
+                                            Periksa Pasien
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
 
-                        <li class="hs-accordion" id="account-accordion">
+                        <li class="hs-accordion" id="projects-accordion">
                             <button type="button"
                                 class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200"
-                                aria-expanded="true" aria-controls="account-accordion-child">
-                                <svg class="shrink-0 mt-0.5 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                aria-expanded="true" aria-controls="projects-accordion-child">
+                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M11.5 15H7a4 4 0 0 0-4 4v2" />
-                                    <path
-                                        d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
-                                    <circle cx="10" cy="7" r="4" />
+                                    <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
                                 </svg>
                                 Pasien
 
@@ -162,110 +165,16 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 </svg>
                             </button>
 
-                            <div id="account-accordion-child"
-                                class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
-                                role="region" aria-labelledby="account-accordion">
-                                <ul class="ps-8 pt-1 space-y-1">
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href={{ route('admin.kelola-pasien.index') }}>
-                                            Kelola Pasien
-                                        </a>
-                                    </li>
-
-
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="hs-accordion" id="projects-accordion">
-                            <button type="button"
-                                class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200"
-                                aria-expanded="true" aria-controls="projects-accordion-child">
-                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 6v4" />
-                                    <path d="M14 14h-4" />
-                                    <path d="M14 18h-4" />
-                                    <path d="M14 8h-4" />
-                                    <path d="M18 12h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h2" />
-                                    <path d="M18 22V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v18" />
-                                </svg>
-                                Poli
-
-                                <svg class="hs-accordion-active:block ms-auto hidden size-4"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="m18 15-6-6-6 6" />
-                                </svg>
-
-                                <svg class="hs-accordion-active:hidden ms-auto block size-4"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="m6 9 6 6 6-6" />
-                                </svg>
-                            </button>
-
                             <div id="projects-accordion-child"
                                 class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
                                 role="region" aria-labelledby="projects-accordion">
                                 <ul class="ps-8 pt-1 space-y-1">
                                     <li>
                                         <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href={{ route('admin.kelola-poli.index') }}>
-                                            Kelola Poli
+                                            href="#">
+                                            Riwayat Pasien
                                         </a>
                                     </li>
-
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="hs-accordion" id="projects-accordion">
-                            <button type="button"
-                                class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200"
-                                aria-expanded="true" aria-controls="projects-accordion-child">
-                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 11v4" />
-                                    <path d="M14 13h-4" />
-                                    <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-                                    <path d="M18 6v14" />
-                                    <path d="M6 6v14" />
-                                    <rect width="20" height="14" x="2" y="6" rx="2" />
-                                </svg>
-                                Obat
-
-                                <svg class="hs-accordion-active:block ms-auto hidden size-4"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="m18 15-6-6-6 6" />
-                                </svg>
-
-                                <svg class="hs-accordion-active:hidden ms-auto block size-4"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="m6 9 6 6 6-6" />
-                                </svg>
-                            </button>
-
-                            <div id="projects-accordion-child"
-                                class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
-                                role="region" aria-labelledby="projects-accordion">
-                                <ul class="ps-8 pt-1 space-y-1">
-                                    <li>
-                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                                            href={{ route('admin.kelola-obat.index') }}>
-                                            Kelola Obat
-                                        </a>
-                                    </li>
-
                                 </ul>
                             </div>
                         </li>
@@ -276,6 +185,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
         </div>
     </div>
     <!-- End Sidebar -->
+
     <!-- Content -->
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
@@ -290,41 +200,53 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Tambah Data Dokter
+                                        Edit Data Dokter
                                     </h2>
-                                    @if (Session::has('error'))
-                                        <div class="mt-2 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
-                                            role="alert" tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
-                                            {{ Session::get('error') }}
-                                        </div>
-                                    @endif
                                 </div>
-
-
                             </div>
+
                             <!-- End Header -->
 
                             <!-- Table -->
                             <div class="p-4 overflow-y-auto">
-                                <form action="{{ route('admin.kelola-dokter.save') }}" method="POST">
+                                @if (Session::has('success'))
+                                    <div class="mb-4 bg-teal-100 border border-teal-200 text-sm text-teal-800 rounded-lg p-4 dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500"
+                                        role="alert" tabindex="-1" aria-labelledby="hs-soft-color-success-label">
+                                        {{ Session::get('success') }}
+                                    </div>
+                                @endif
+                                @if (Session::has('error'))
+                                    <div class="mb-4 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
+                                        role="alert" tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
+                                        {{ Session::get('error') }}
+                                    </div>
+                                @endif
+                                <form action="{{ route('dokter.profile.update') }}" method="POST">
                                     @csrf
+                                    @method('PUT')
 
-                                    <!-- Nama Dokter -->
+                                    <!-- Nama -->
                                     <div class="mb-4">
-                                        <label for="nama" class="block text-gray-800 dark:text-neutral-400">Nama
-                                            Dokter</label>
-                                        <input type="text" id="nama" name="nama" value="{{ old('nama') }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Masukkan nama dokter" required>
+                                        <label for="nama"
+                                            class="block text-gray-800 dark:text-neutral-400">Nama</label>
+                                        <input type="text" id="nama" name="nama"
+                                            value="{{ old('nama', $dokter->nama) }}"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"">
+                                        @error('nama')
+                                            <small class="text-red-500">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     <!-- Email -->
                                     <div class="mb-4">
                                         <label for="email"
                                             class="block text-gray-800 dark:text-neutral-400">Email</label>
-                                        <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Masukkan email dokter" required>
+                                        <input type="email" id="email" name="email"
+                                            value="{{ old('email', $dokter->email) }}"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"">
+                                        @error('email')
+                                            <small class="text-red-500">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     <!-- Alamat -->
@@ -332,30 +254,40 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                         <label for="alamat"
                                             class="block text-gray-800 dark:text-neutral-400">Alamat</label>
                                         <textarea id="alamat" name="alamat"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            rows="4" placeholder="Masukkan alamat dokter" required>{{ old('alamat') }}</textarea>
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"">{{ old('alamat', $dokter->alamat) }}</textarea>
+                                        @error('alamat')
+                                            <small class="text-red-500">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
-                                    <!-- No. HP -->
+                                    <!-- No HP -->
                                     <div class="mb-4">
-                                        <label for="no_hp" class="block text-gray-800 dark:text-neutral-400">No.
+                                        <label for="no_hp" class="block text-gray-800 dark:text-neutral-400">No
                                             HP</label>
-                                        <input type="number" id="no_hp" name="no_hp" value="{{ old('no_hp') }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Masukkan nomor HP dokter" required>
+                                        <input type="text" id="no_hp" name="no_hp"
+                                            value="{{ old('no_hp', $dokter->no_hp) }}"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"">
+                                        @error('no_hp')
+                                            <small class="text-red-500">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     <!-- Poli -->
                                     <div class="mb-4">
                                         <label for="id_poli"
                                             class="block text-gray-800 dark:text-neutral-400">Poli</label>
-                                        <select id="id_poli" name="id_poli" required
-                                            class="mt-2 py-2 px-4 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
-                                            <option value="" disabled selected>Pilih Poli</option>
+                                        <select id="id_poli" name="id_poli"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"">
                                             @foreach ($polis as $poli)
-                                                <option value="{{ $poli->id }}">{{ $poli->nama_poli }}</option>
+                                                <option value="{{ $poli->id }}"
+                                                    {{ $dokter->id_poli == $poli->id ? 'selected' : '' }}>
+                                                    {{ $poli->nama_poli }}
+                                                </option>
                                             @endforeach
                                         </select>
+                                        @error('id_poli')
+                                            <small class="text-red-500">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     <!-- Password -->
@@ -364,8 +296,9 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             class="block text-gray-800 dark:text-neutral-400">Password</label>
                                         <div class="relative">
                                             <input type="password" id="password" name="password"
-                                                class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                                placeholder="Masukkan password" required>
+                                                class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white""
+                                                placeholder="Kosongkan jika tidak ingin mengubah password">
+
                                             <button type="button" id="toggle-password"
                                                 class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
                                                 <svg id="toggle-password-icon" xmlns="http://www.w3.org/2000/svg"
@@ -388,20 +321,22 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                                         cy="12" r="3"></circle>
                                                 </svg>
                                             </button>
+                                            @error('password')
+                                                <small class="text-red-500">{{ $message }}</small>
+                                            @enderror
                                         </div>
 
                                     </div>
 
-
-                                    <!-- Konfirmasi Password -->
+                                    <!-- Confirm Password -->
                                     <div class="mb-4">
                                         <label for="password_confirmation"
                                             class="block text-gray-800 dark:text-neutral-400">Konfirmasi Password</label>
                                         <div class="relative">
                                             <input type="password" id="password_confirmation"
                                                 name="password_confirmation"
-                                                class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                                placeholder="Ulangi password" required>
+                                                class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white""
+                                                placeholder="Kosongkan jika tidak ingin mengubah password">
                                             <button type="button" id="toggle-password_confirmation"
                                                 class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600 dark:text-neutral-600 dark:focus:text-blue-500">
                                                 <svg id="toggle-password_confirmation-icon"
@@ -425,14 +360,18 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                                 </svg>
                                             </button>
                                         </div>
-
                                     </div>
-                                    
-                                    <div class="flex justify-end gap-2">
-                                        <a href="{{ route('admin.kelola-dokter.index') }}"
-                                            class="py-2 px-4 text-sm font-medium border bg-white text-gray-800 rounded-lg">Kembali</a>
+
+                                    <!-- Submit Button -->
+                                    <div class="flex justify-end items-center gap-x-2 px-4">
+                                        <a href="{{ route('dokter.dashboard.index') }}"
+                                            class="py-2 px-3 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700">
+                                            Kembali
+                                        </a>
                                         <button type="submit"
-                                            class="py-2 px-4 text-sm font-medium text-white bg-blue-600 rounded-lg">Simpan</button>
+                                            class="py-2 px-3 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50">
+                                            Simpan
+                                        </button>
                                     </div>
                                 </form>
                             </div>

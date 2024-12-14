@@ -99,6 +99,7 @@
 
 
                     <!-- Dropdown -->
+
                     <div class="hs-dropdown [--placement:bottom-right] relative inline-flex">
                         <button id="hs-dropdown-account" type="button"
                             class="size-[38px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:text-white"
@@ -113,22 +114,21 @@
                             <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-700">
                                 <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p>
                                 <p class="text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                    {{ Auth::user()->email }}</p>
+                                    {{ Auth::user()->nama }}</p>
                             </div>
-                            {{-- 
-                            <div class="p-1.5 space-y-0.5">
-                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                                    href="{{ Auth::user()->role == 'Admin' ? route('admin.dashboard.profile') : (Auth::user()->role == 'Dokter' ? route('dokter.profile') : route('profile')) }}">
-                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                        <circle cx="9" cy="7" r="4" />
-                                    </svg>
-                                    Profile
-                                </a> 
-                                 --}}
-
+                            @if (Auth::user()->role == 'Dokter' || Auth::user()->role == 'Pasien')
+                                <div class="p-1.5 space-y-0.5">
+                                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
+                                        href="{{ Auth::user()->role == 'Dokter' ? route('dokter.profile') : route('dashboard') }}">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                            <circle cx="9" cy="7" r="4" />
+                                        </svg>
+                                        Profile
+                                    </a>
+                            @endif
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
@@ -147,7 +147,9 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- End Dropdown -->
+
             </div>
             </div>
         </nav>
@@ -181,40 +183,40 @@
         });
     </script>
 
-<script>
-    const passwordInput = document.getElementById('password');
-    const togglePasswordButton = document.getElementById('toggle-password');
-    const togglePasswordIcon = document.getElementById('toggle-password-icon');
+    <script>
+        const passwordInput = document.getElementById('password');
+        const togglePasswordButton = document.getElementById('toggle-password');
+        const togglePasswordIcon = document.getElementById('toggle-password-icon');
 
-    togglePasswordButton.addEventListener('click', () => {
-        const isPasswordVisible = passwordInput.type === 'text';
-        passwordInput.type = isPasswordVisible ? 'password' : 'text';
-        togglePasswordIcon.setAttribute(
-            'd',
-            isPasswordVisible ?
-            'M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z' // Replace with eye-open path
-            :
-            'M15 12l.011-.011M12...' // Replace with eye-close path
-        );
-    });
-</script>
-<script>
-    const confirmationPasswordInput = document.getElementById('password_confirmation');
-    const toggleConfirmationPasswordButton = document.getElementById('toggle-password_confirmation');
-    const toggleConfirmationPasswordIcon = document.getElementById('toggle-password_confirmation-icon');
+        togglePasswordButton.addEventListener('click', () => {
+            const isPasswordVisible = passwordInput.type === 'text';
+            passwordInput.type = isPasswordVisible ? 'password' : 'text';
+            togglePasswordIcon.setAttribute(
+                'd',
+                isPasswordVisible ?
+                'M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z' // Replace with eye-open path
+                :
+                'M15 12l.011-.011M12...' // Replace with eye-close path
+            );
+        });
+    </script>
+    <script>
+        const confirmationPasswordInput = document.getElementById('password_confirmation');
+        const toggleConfirmationPasswordButton = document.getElementById('toggle-password_confirmation');
+        const toggleConfirmationPasswordIcon = document.getElementById('toggle-password_confirmation-icon');
 
-    toggleConfirmationPasswordButton.addEventListener('click', () => {
-        const isPasswordVisible = confirmationPasswordInput.type === 'text';
-        confirmationPasswordInput.type = isPasswordVisible ? 'password' : 'text';
-        toggleConfirmationPasswordIcon.setAttribute(
-            'd',
-            isPasswordVisible ?
-            'M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z' // Replace with eye-open path
-            :
-            'M15 12l.011-.011M12...' // Replace with eye-close path
-        );
-    });
-</script>
+        toggleConfirmationPasswordButton.addEventListener('click', () => {
+            const isPasswordVisible = confirmationPasswordInput.type === 'text';
+            confirmationPasswordInput.type = isPasswordVisible ? 'password' : 'text';
+            toggleConfirmationPasswordIcon.setAttribute(
+                'd',
+                isPasswordVisible ?
+                'M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z' // Replace with eye-open path
+                :
+                'M15 12l.011-.011M12...' // Replace with eye-close path
+            );
+        });
+    </script>
 
     <script>
         window.addEventListener("load", () => {

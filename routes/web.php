@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\KelolaObat;
 use App\Http\Controllers\Admin\KelolaPasien;
 use App\Http\Controllers\Admin\KelolaPoli;
 use App\Http\Controllers\Dokter\DokterController;
+use App\Http\Controllers\Dokter\JadwalPeriksa;
+use App\Http\Controllers\Dokter\ProfileDokter;
 //use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +33,7 @@ require __DIR__ . '/auth.php';
 // PASIEN ROUTES
 Route::middleware(['auth', 'PasienMiddleware'])->group(function () {
     Route::get('dashboard', [PasienController::class, 'index'])->name('dashboard');
+    Route::get('profile', [PasienController::class, 'profile'])->name('profile');
 });
 
 // ADMIN ROUTES
@@ -73,5 +76,13 @@ Route::middleware(['auth', 'AdminMiddleware'])->group(function () {
 
 // DOKTER ROUTES
 Route::middleware(['auth', 'DokterMiddleware'])->group(function () {
-    Route::get('/dokter/dashboard', [DokterController::class, 'index'])->name('dokter.dashboard');
+    // Dashboard dokter
+    Route::get('/dokter/dashboard', [DokterController::class, 'index'])->name('dokter.dashboard.index');
+
+    // Profil dokter
+    Route::get('/dokter/profile', [ProfileDokter::class, 'profile'])->name('dokter.profile');
+    Route::put('/dokter/profile/update', [ProfileDokter::class, 'update'])->name('dokter.profile.update');
+
+    // Jadwal Periksa
+    Route::get('/dokter/jadwal-periksa', [JadwalPeriksa::class, 'index'])->name('dokter.jadwal-periksa.index');
 });
