@@ -200,130 +200,67 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Jadwal Periksa
+                                        Edit Jadwal Periksa
                                     </h2>
-                                    <p class="text-sm text-gray-600 dark:text-neutral-400">
-                                        Tambah Jadwal Periksa, edit, dan hapus Jadwal Periksa
-                                    </p>
-
+                                    @if (Session::has('error'))
+                                        <div class="mt-2 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
+                                            role="alert" tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
+                                            {{ Session::get('error') }}
+                                        </div>
+                                    @endif
                                 </div>
 
-                                <div>
-                                    <div class="py-3 px-4 inline-flex gap-x-2">
-                                        <form action="{{ route('dokter.jadwal-periksa.index') }}" method="GET">
-                                            <div class="relative max-w-xs w-full">
-                                                <label for="hs-table-search" class="sr-only">Search</label>
-                                                <input type="text" name="search" id="hs-table-search"
-                                                    class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                    placeholder="Cari jadwal periksa..." value="{{ request('search') }}">
-                                                <div
-                                                    class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
-                                                    <svg class="size-4 text-gray-400 dark:text-neutral-500"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="11" cy="11" r="8"></circle>
-                                                        <path d="m21 21-4.3-4.3"></path>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </form>
 
-                                        <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                                            href={{ route('dokter.jadwal-periksa.create') }}>
-                                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="M5 12h14" />
-                                                <path d="M12 5v14" />
-                                            </svg>
-                                            Tambah Dokter
-                                        </a>
-
-                                    </div>
-                                </div>
-                                {{-- 
-                                @if (Session::has('success'))
-                                    <div class="w-full mt-4 bg-teal-100 border border-teal-200 text-sm text-teal-800 rounded-lg p-4 dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500" role="alert" tabindex="-1" aria-labelledby="hs-soft-color-success-label">
-                                        {{ Session::get('success') }}
-                                    </div>
-                                @endif
-                                 --}}
                             </div>
-
                             <!-- End Header -->
 
                             <!-- Table -->
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No.
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Hari
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Jam Mulai
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Jam Selesai
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                            <div class="p-4 overflow-y-auto">
+                                <form action="{{ route('dokter.jadwal-periksa.update', $jadwal->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
 
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                    @forelse ($jadwals as $jadwal)
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $loop->iteration }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $jadwal->hari }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $jadwal->jam_mulai }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $jadwal->jam_selesai }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                <div class="flex gap-2">
-                                                    <a href="{{ route('dokter.jadwal-periksa.edit', $jadwal->id) }}"
-                                                        class="py-2 px-4 inline-flex items-center text-sm font-medium rounded-lg border bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20">
-                                                        Edit
-                                                    </a>
-                                                    <a href="{{ route('dokter.jadwal-periksa.delete', $jadwal->id) }}"
-                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                                                        class="py-2 px-4 inline-flex items-center text-sm font-medium rounded-lg border bg-red-100 text-red-800 hover:bg-red-200 focus:outline-none dark:text-red-500 dark:bg-red-800/30 dark:hover:bg-red-800/20">
-                                                        Hapus
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                                            <td colspan="6"
-                                                class="px-6 py-4 text-center text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                Data jadwal tidak ada
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                                    <!-- Hari -->
+                                    <div class="mb-4">
+                                        <label for="hari" class="block text-gray-800 dark:text-neutral-400">Hari</label>
+                                        <input type="text" id="hari" name="hari"
+                                            value="{{ old('hari', $jadwal->hari) }}"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                            placeholder="Hari" required>
+                                    </div>
+
+                                    <!-- Jam Mulai -->
+                                    <div class="mb-4">
+                                        <label for="jam_mulai"
+                                            class="block text-gray-800 dark:text-neutral-400">Jam Mulai</label>
+                                        <input type="time" id="jam_mulai" name="jam_mulai"
+                                            value="{{ old('jam_mulai', $jadwal->jam_mulai) }}"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                            placeholder="Jam Mulai" required>
+                                    </div>
+
+                                    <!-- Jam Selesai -->
+                                    <div class="mb-4">
+                                        <label for="jam_selesai" class="block text-gray-800 dark:text-neutral-400">Jam Selesai</label>
+                                        <input type="time" id="jam_selesai" name="jam_selesai"
+                                            value="{{ old('jam_selesai', $jadwal->jam_selesai) }}"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
+                                            placeholder="Jam Selesai" required>
+                                    </div>
+
+                                    <!-- Buttons -->
+                                    <div class="flex justify-end items-center gap-x-2 px-4">
+                                        <a href="{{ route('dokter.jadwal-periksa.index') }}"
+                                            class="py-2 px-3 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700">
+                                            Kembali
+                                        </a>
+                                        <button type="submit"
+                                            class="py-2 px-3 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50">
+                                            Simpan
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
 
                             <!-- End Table -->
                         </div>

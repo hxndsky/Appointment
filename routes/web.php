@@ -85,4 +85,9 @@ Route::middleware(['auth', 'DokterMiddleware'])->group(function () {
 
     // Jadwal Periksa
     Route::get('/dokter/jadwal-periksa', [JadwalPeriksa::class, 'index'])->name('dokter.jadwal-periksa.index');
+    Route::get('/dokter/jadwal-periksa/create', [JadwalPeriksa::class, 'create'])->name('dokter.jadwal-periksa.create');
+    Route::post('/dokter/jadwal-periksa', [JadwalPeriksa::class, 'save'])->name('dokter.jadwal-periksa.save');
+    Route::get('/dokter/jadwal-periksa/edit/{id}', [JadwalPeriksa::class, 'edit'])->name('dokter.jadwal-periksa.edit');
+    Route::put('/dokter/jadwal-periksa/edit/{id}', [JadwalPeriksa::class, 'update'])->name('dokter.jadwal-periksa.update');
+    Route::get('/dokter/jadwal-periksa/delete/{id}', [JadwalPeriksa::class, 'delete'])->name('dokter.jadwal-periksa.delete');
 });
