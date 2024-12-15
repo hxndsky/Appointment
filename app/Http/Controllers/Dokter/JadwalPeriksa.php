@@ -66,13 +66,6 @@ class JadwalPeriksa extends Controller
     {
         // Cari jadwal berdasarkan ID
         $jadwal = DokterJadwalPeriksa::findOrFail($id);
-
-        // Validasi apakah jadwal milik dokter yang login
-        $dokter = KelolaDokter::where('email', Auth::user()->email)->first();
-        if ($jadwal->id_dokter !== $dokter->id) {
-            return redirect()->route('dokter.jadwal-periksa.index')->withErrors(['error' => 'Anda tidak memiliki akses untuk mengedit jadwal ini.']);
-        }
-
         return view('dokter.jadwal-periksa.edit', compact('jadwal'));
     }
 
@@ -100,10 +93,9 @@ class JadwalPeriksa extends Controller
         return redirect()->route('dokter.jadwal-periksa.index')->with('success', 'Jadwal berhasil diperbarui.');
     }
 
-
     public function delete($id)
     {
-        $jadwal = DokterJadwalPeriksa::where('id', $id)->where('id_dokter', Auth::user()->id)->firstOrFail();
+        $jadwal = DokterJadwalPeriksa::findOrFail($id);
         $jadwal->delete();
 
         return redirect()->route('dokter.jadwal-periksa.index')->with('success', 'Jadwal berhasil dihapus.');

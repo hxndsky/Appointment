@@ -1,6 +1,6 @@
 @extends('layouts.app')
 <!-- DOKTER -->
-@section('title', 'Dashboard')
+@section('title', 'Data Diri Dokter')
 @section('content')
     <!-- Breadcrumb -->
     <div
