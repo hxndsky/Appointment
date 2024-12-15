@@ -218,6 +218,16 @@
         });
     </script>
 
+<script>
+    // Toggle modal visibility
+    document.querySelectorAll('[data-modal-toggle]').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const modalId = e.target.getAttribute('data-modal-toggle');
+            document.getElementById(modalId).classList.remove('hidden');
+        });
+    });
+  </script>
+
     <script>
         window.addEventListener("load", () => {
             (function() {

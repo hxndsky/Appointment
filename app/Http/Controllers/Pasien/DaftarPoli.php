@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Http\Controllers\Pasien;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Pasien\DaftarPoli as PasienDaftarPoli;
+use App\Models\Dokter\JadwalPeriksa;
+use Illuminate\Support\Facades\Auth;
+
+class DaftarPoli extends Controller
+{
+    public function index()
+    {
+        $user = Auth::user(); // Ambil user yang sedang login
+
+        // Ambil daftar poli berdasarkan pasien yang login
+        $daftarPolis = PasienDaftarPoli::with(['jadwal.dokter'])
+            ->where('id_pasien', $user->id) // Filter berdasarkan pasien yang login
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('daftar-poli.index', compact('daftarPolis'));
+    }
+
+    public function create()
+    {
+        // Ambil user yang sedang login
+        $user = Auth::user();
+
+        // Ambil jadwal dokter untuk dipilih
+        $jadwals = JadwalPeriksa::with('dokter')->get();
+
+        return view('daftar-poli.create', [
+            'jadwals' => $jadwals,
+            'no_rm' => $user->no_rm, // Nomor rekam medis pasien
+        ]);
+    }
+
+    public function save(Request $request)
+    {
+        $user = Auth::user(); // Ambil user yang login
+
+        // Validasi input
+        $validated = $request->validate([
+            'id_jadwal' => 'required|exists:jadwal_periksa,id',
+            'keluhan' => 'required|string|max:255',
+        ]);
+
+        // Hitung nomor antrian
+        $noAntrian = PasienDaftarPoli::where('id_jadwal', $validated['id_jadwal'])->count() + 1;
+
+        // Simpan pendaftaran
+        PasienDaftarPoli::create([
+            'id_pasien' => $user->id, // Gunakan ID pasien dari user yang login
+            'id_jadwal' => $validated['id_jadwal'],
+            'keluhan' => $validated['keluhan'],
+            'no_antrian' => $noAntrian,
+        ]);
+
+        return redirect()->route('daftar-poli.index')->with('success', 'Pendaftaran berhasil!');
+    }
+
+    public function show($id)
+{
+    // Ambil data daftar poli berdasarkan ID
+    $daftarPoli = PasienDaftarPoli::with(['jadwal.dokter', 'pasien'])->findOrFail($id);
+
+    return view('daftar-poli.show', compact('daftarPoli'));
+}
+
+}

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\KelolaPoli;
 use App\Http\Controllers\Dokter\DokterController;
 use App\Http\Controllers\Dokter\JadwalPeriksa;
 use App\Http\Controllers\Dokter\ProfileDokter;
+use App\Http\Controllers\Pasien\DaftarPoli;
 //use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +34,13 @@ require __DIR__ . '/auth.php';
 // PASIEN ROUTES
 Route::middleware(['auth', 'PasienMiddleware'])->group(function () {
     Route::get('dashboard', [PasienController::class, 'index'])->name('dashboard');
-    Route::get('profile', [PasienController::class, 'profile'])->name('profile');
+
+    // DAFTAR POLI
+    Route::get('/daftar-poli', [DaftarPoli::class, 'index'])->name('daftar-poli.index');
+    Route::get('/daftar-poli/create', [DaftarPoli::class, 'create'])->name('daftar-poli.create');
+    Route::post('/daftar-poli', [DaftarPoli::class, 'save'])->name('daftar-poli.save');
+    //Route::get('/daftar-poli/{id}/detail', [DaftarPoli::class, 'show'])->name('daftar-poli.show');
+
 });
 
 // ADMIN ROUTES
