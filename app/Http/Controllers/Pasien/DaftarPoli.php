@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pasien\DaftarPoli as PasienDaftarPoli;
 use App\Models\Dokter\JadwalPeriksa;
+use App\Models\Admin\KelolaPoli;
 use Illuminate\Support\Facades\Auth;
 
 class DaftarPoli extends Controller
@@ -23,19 +24,32 @@ class DaftarPoli extends Controller
         return view('daftar-poli.index', compact('daftarPolis'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         // Ambil user yang sedang login
         $user = Auth::user();
 
-        // Ambil jadwal dokter untuk dipilih
-        $jadwals = JadwalPeriksa::with('dokter')->get();
+        // Ambil semua data Poli
+        $polis = KelolaPoli::all();
+
+        // Ambil jadwal berdasarkan Poli yang dipilih
+        $jadwals = collect();
+        if ($request->has('poli_id') && $request->poli_id != '') {
+            $jadwals = JadwalPeriksa::with('dokter')
+                ->whereHas('dokter', function ($query) use ($request) {
+                    $query->where('id_poli', $request->poli_id);
+                })
+                ->get();
+        }
 
         return view('daftar-poli.create', [
+            'polis' => $polis,
             'jadwals' => $jadwals,
             'no_rm' => $user->no_rm, // Nomor rekam medis pasien
+            'selectedPoli' => $request->poli_id ?? '', // Poli yang dipilih
         ]);
     }
+
 
     public function save(Request $request)
     {
@@ -62,11 +76,10 @@ class DaftarPoli extends Controller
     }
 
     public function show($id)
-{
-    // Ambil data daftar poli berdasarkan ID
-    $daftarPoli = PasienDaftarPoli::with(['jadwal.dokter', 'pasien'])->findOrFail($id);
+    {
+        // Ambil data daftar poli berdasarkan ID
+        $daftarPoli = PasienDaftarPoli::with(['jadwal.dokter', 'pasien'])->findOrFail($id);
 
-    return view('daftar-poli.show', compact('daftarPoli'));
-}
-
+        return view('daftar-poli.show', compact('daftarPoli'));
+    }
 }

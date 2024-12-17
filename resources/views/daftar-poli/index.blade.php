@@ -294,8 +294,8 @@ dark:bg-neutral-800 dark:border-neutral-700"
             <!-- Modal Structure (Hidden initially) -->
             @foreach ($daftarPolis as $poli)
                 <div id="modal-{{ $poli->id }}"
-                    class="fixed inset-0 flex items-center justify-center z-50 hidden bg-black bg-opacity-50 backdrop-blur-sm">
-                    <div class="bg-white text-center p-8 rounded-lg shadow-lg dark:bg-neutral-800 max-w-xl w-full h-auto">
+                    class="fixed inset-0 flex items-center justify-center z-50 hidden">
+                    <div class="bg-white text-center p-8 rounded-lg shadow-xl dark:bg-neutral-800 max-w-xl w-full h-auto">
                         <h1 class="text-2xl mb-8 font-semibold text-gray-800 dark:text-neutral-200">Detail Daftar Poli</h1>
                         <p class="mb-4"><strong>No. Rekam Medis:</strong><br> {{ $poli->pasien->no_rm }}</p>
                         <p class="mb-4"><strong>Nama Poli:</strong><br> {{ $poli->jadwal->dokter->poli->nama_poli }}</p>

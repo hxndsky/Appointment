@@ -164,53 +164,80 @@ dark:bg-neutral-800 dark:border-neutral-700"
 
                             <!-- Table -->
                             <div class="p-4 overflow-y-auto">
-                                <form action="{{ route('daftar-poli.save') }}" method="POST">
-                                    @csrf
-
+                                <form action="{{ route('daftar-poli.create') }}" method="GET">
                                     <!-- No Rekam Medis -->
                                     <div class="mb-4">
-                                        <label for="no_rm"
-                                            class="block text-gray-800 dark:text-neutral-400">No. Rekam Medis</label>
-                                        <input type="text" id="no_rm" name="no_rm"
-                                            value="{{ $no_rm }}"
+                                        <label for="no_rm" class="block text-gray-800">No. Rekam Medis</label>
+                                        <input type="text" id="no_rm" name="no_rm" value="{{ $no_rm }}"
                                             class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg" readonly>
                                     </div>
 
-                                    <!-- Pilih Jadwal Dokter -->
-                                    <div class="mb-3">
-                                        <label for="id_jadwal" class="form-label">Pilih Jadwal Dokter</label>
-                                        <select
-                                            class="mt-2 py-2 px-4 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            name="id_jadwal" required>
-                                            <option value="" disabled selected>Pilih Jadwal Dokter</option>
-                                            @foreach ($jadwals as $jadwal)
-                                                <option value="{{ $jadwal->id }}">
-                                                    {{ $jadwal->dokter->nama }} - {{ $jadwal->hari }}
-                                                    ({{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }})
+                                    <!-- Pilih Poli -->
+                                    <div class="mb-4">
+                                        <label for="poli_id" class="block text-gray-800">Pilih Poli</label>
+                                        <select id="poli_id" name="poli_id" onchange="this.form.submit()"
+                                            class="mt-2 py-2 px-4 w-full border border-gray-300 rounded-lg">
+                                            <option value="" disabled selected>Pilih Poli</option>
+                                            @foreach ($polis as $poli)
+                                                <option value="{{ $poli->id }}"
+                                                    {{ $selectedPoli == $poli->id ? 'selected' : '' }}>
+                                                    {{ $poli->nama_poli }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
-
-                                    <!-- Keluhan -->
-                                    <div class="mb-4">
-                                        <label for="keluhan"
-                                            class="block text-gray-800 dark:text-neutral-400">Keluhan</label>
-                                        <textarea id="keluhan" name="keluhan"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            rows="4" placeholder="Masukkan keluhan" required>{{ old('keluhan') }}</textarea>
-                                    </div>
-
-                                    <div class="flex justify-end gap-2">
-                                        <a href="{{ route('daftar-poli.index') }}"
-                                            class="py-2 px-4 text-sm font-medium border bg-white text-gray-800 rounded-lg">Kembali</a>
-                                        <button type="submit"
-                                            class="py-2 px-4 text-sm font-medium text-white bg-blue-600 rounded-lg">Simpan</button>
-                                    </div>
                                 </form>
+
+                                <!-- Pilih Jadwal Dokter -->
+                                @if ($selectedPoli)
+                                    <form action="{{ route('daftar-poli.save') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="poli_id" value="{{ $selectedPoli }}">
+
+                                        @if ($jadwals->isEmpty())
+                                            <div class="text-red-500 mb-4">
+                                                Tidak ada jadwal yang tersedia untuk poli ini.
+                                            </div>
+                                        @else
+                                            <div class="mb-4">
+                                                <label for="id_jadwal" class="block text-gray-800">Pilih Jadwal
+                                                    Dokter</label>
+                                                <select id="id_jadwal" name="id_jadwal"
+                                                    class="mt-2 py-2 px-4 w-full border border-gray-300 rounded-lg"
+                                                    required>
+                                                    <option value="" disabled selected>Pilih Jadwal</option>
+                                                    @foreach ($jadwals as $jadwal)
+                                                        <option value="{{ $jadwal->id }}">
+                                                            {{ $jadwal->dokter->nama }} - {{ $jadwal->hari }}
+                                                            ({{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }})
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
+
+                                        <!-- Keluhan -->
+                                        <div class="mb-4">
+                                            <label for="keluhan" class="block text-gray-800">Keluhan</label>
+                                            <textarea id="keluhan" name="keluhan" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg"
+                                                rows="4" placeholder="Masukkan keluhan" required>{{ old('keluhan') }}</textarea>
+                                        </div>
+
+                                        <!-- Tombol Aksi -->
+                                        <div class="flex justify-end gap-2">
+                                            <a href="{{ route('daftar-poli.index') }}"
+                                                class="py-2 px-4 text-sm font-medium border bg-white text-gray-800 rounded-lg">
+                                                Kembali
+                                            </a>
+                                            <button type="submit"
+                                                class="py-2 px-4 text-sm font-medium text-white bg-blue-600 rounded-lg">
+                                                Simpan
+                                            </button>
+                                        </div>
+                                    </form>
+                                @endif
                             </div>
 
-                            <!-- End Table -->
                         </div>
                     </div>
                 </div>
