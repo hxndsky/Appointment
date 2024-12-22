@@ -1,6 +1,6 @@
 @extends('layouts.app')
 <!-- DOKTER -->
-@section('title', 'Tambah Jadwal Periksa')
+@section('title', 'Periksa Pasien')
 @section('content')
     <!-- Breadcrumb -->
     <div
@@ -33,7 +33,7 @@
                     </svg>
                 </li>
                 <li class="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                    Jadwal Periksa
+                    Periksa Pasien
                 </li>
             </ol>
             <!-- End Breadcrumb -->
@@ -200,63 +200,42 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Tambah Jadwal Periksa
+                                        Riwayat Pasien
                                     </h2>
-                                    @if (Session::has('error'))
-                                        <div class="mt-2 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
-                                            role="alert" tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
-                                            {{ Session::get('error') }}
-                                        </div>
-                                    @endif
+                                    <p class="text-sm text-gray-600 dark:text-neutral-400">
+                                        List pasien sudah diperiksa
+                                    </p>
+
                                 </div>
 
-
+                                <div>
+                                    <div class="py-3 px-4 inline-flex gap-x-2">
+                                        <form action="{{ route('dokter.riwayat-pasien.index') }}" method="GET">
+                                            <div class="relative max-w-xs w-full">
+                                                <label for="hs-table-search" class="sr-only">Search</label>
+                                                <input type="text" name="search" id="hs-table-search"
+                                                    class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                    placeholder="Cari Periksa Pasien..." value="{{ request('search') }}">
+                                                <div
+                                                    class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
+                                                    <svg class="size-4 text-gray-400 dark:text-neutral-500"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <circle cx="11" cy="11" r="8"></circle>
+                                                        <path d="m21 21-4.3-4.3"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
+
                             <!-- End Header -->
 
                             <!-- Table -->
-                            <div class="p-4 overflow-y-auto">
-                                <form action="{{ route('dokter.jadwal-periksa.save') }}" method="POST">
-                                    @csrf
-
-                                    <!-- Hari -->
-                                    <div class="mb-4">
-                                        <label for="hari"
-                                            class="block text-gray-800 dark:text-neutral-400">Hari</label>
-                                        <input type="text" id="hari" name="hari" value="{{ old('hari') }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Masukkan hari" required>
-                                    </div>
-
-                                    <!-- Jam Mulai -->
-                                    <div class="mb-4">
-                                        <label for="jam_mulai" class="block text-gray-800 dark:text-neutral-400">Jam
-                                            Mulai</label>
-                                        <input type="time" id="jam_mulai" name="jam_mulai"
-                                            value="{{ old('jam_mulai') }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Masukkan jam mulai" required>
-                                    </div>
-
-                                    <!-- Jam Selesai -->
-                                    <div class="mb-4">
-                                        <label for="jam_selesai" class="block text-gray-800 dark:text-neutral-400">Jam
-                                            Selesai</label>
-                                        <input type="time" id="jam_selesai" name="jam_selesai"
-                                            value="{{ old('jam_selesai') }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Masukkan jam selesai" required>
-                                    </div>
-
-                                    <div class="flex justify-end gap-2">
-                                        <a href="{{ route('dokter.jadwal-periksa.index') }}"
-                                            class="py-2 px-4 text-sm font-medium border bg-white text-gray-800 rounded-lg">Kembali</a>
-                                        <button type="submit"
-                                            class="py-2 px-4 text-sm font-medium text-white bg-blue-600 rounded-lg">Simpan</button>
-                                    </div>
-                                </form>
-                            </div>
-
+                            
                             <!-- End Table -->
                         </div>
                     </div>
