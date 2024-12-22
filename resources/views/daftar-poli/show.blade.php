@@ -141,6 +141,16 @@ dark:bg-neutral-800 dark:border-neutral-700"
             <div class="flex flex-col">
                 <div class="-m-1.5 overflow-x-auto">
                     <div class="p-1.5 min-w-full inline-block align-middle">
+                        <div class="flex justify-start gap-2 mb-4">
+                            <a href="{{ route('daftar-poli.index') }}"
+                                class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-black hover:bg-blue-700 hover:text-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left">
+                                    <path d="m15 18-6-6 6-6" />
+                                </svg>Kembali
+                            </a>
+                        </div>
                         <div
                             class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
                             <!-- Header -->
@@ -208,10 +218,6 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                         <p>{{ $daftarPoli->keluhan }}</p>
                                     </div>
 
-                                    <div class="flex justify-end gap-2">
-                                        <a href="{{ route('daftar-poli.index') }}"
-                                            class="py-2 px-4 text-sm font-medium border bg-white text-gray-800 rounded-lg">Kembali</a>
-                                    </div>
                                 </form>
                             </div>
 

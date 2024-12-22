@@ -1,6 +1,6 @@
 @extends('layouts.app')
 <!-- DOKTER -->
-@section('title', 'Riwayat Pasien')
+@section('title', 'Detail Riwayat Pasien')
 @section('content')
     <!-- Breadcrumb -->
     <div
@@ -33,7 +33,7 @@
                     </svg>
                 </li>
                 <li class="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                    Riwayat Pasien
+                    Detail Riwayat Pasien
                 </li>
             </ol>
             <!-- End Breadcrumb -->
@@ -193,6 +193,16 @@ dark:bg-neutral-800 dark:border-neutral-700"
             <div class="flex flex-col">
                 <div class="-m-1.5 overflow-x-auto">
                     <div class="p-1.5 min-w-full inline-block align-middle">
+                        <div class="flex justify-start gap-2 mb-4">
+                            <a href="{{ route('dokter.riwayat-pasien.index') }}"
+                                class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-black hover:bg-blue-700 hover:text-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left">
+                                    <path d="m15 18-6-6 6-6" />
+                                </svg>Kembali
+                            </a>
+                        </div>
                         <div
                             class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-800 dark:border-neutral-700">
                             <!-- Header -->
@@ -200,118 +210,67 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Riwayat Pasien
+                                        Detail Riwayat Pasien
                                     </h2>
-                                    <p class="text-sm text-gray-600 dark:text-neutral-400">
-                                        List pasien sudah diperiksa
-                                    </p>
-
-                                </div>
-
-                                <div>
-                                    <div class="py-3 px-4 inline-flex gap-x-2">
-                                        <form action="{{ route('dokter.riwayat-pasien.index') }}" method="GET">
-                                            <div class="relative max-w-xs w-full">
-                                                <label for="hs-table-search" class="sr-only">Search</label>
-                                                <input type="text" name="search" id="hs-table-search"
-                                                    class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                    placeholder="Cari Riwayat Pasien..." value="{{ request('search') }}">
-                                                <div
-                                                    class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
-                                                    <svg class="size-4 text-gray-400 dark:text-neutral-500"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="11" cy="11" r="8"></circle>
-                                                        <path d="m21 21-4.3-4.3"></path>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
 
                             <!-- End Header -->
 
                             <!-- Table -->
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No.
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Nama Pasien
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Alamat
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No. KTP
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No. Telepon
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No. Rekam Medis
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Aksi
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                    @forelse ($riwayatPasien as $item)
-                                        <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $loop->iteration }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $item->daftarPoli->pasien->nama }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $item->daftarPoli->pasien->alamat }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $item->daftarPoli->pasien->no_ktp }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $item->daftarPoli->pasien->no_hp }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $item->daftarPoli->pasien->no_rm }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                <a href="{{ route('dokter.riwayat-pasien.show', $item->id) }}"
-                                                    class="py-2 px-4 inline-flex items-center text-sm font-medium rounded-lg border bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20">
-                                                    Detail Periksa
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5" class="text-center p-4 text-gray-500">Belum ada riwayat
-                                                pasien yang diperiksa.
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                            <div class="p-4 overflow-y-auto">
+                                <form>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-800 dark:text-neutral-400 font-bold">Tanggal
+                                            Periksa</label>
+                                        <p>{{ \Carbon\Carbon::parse($periksa->tgl_periksa)->format('d M Y') }}</p>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-800 dark:text-neutral-400 font-bold">Nama
+                                            Pasien</label>
+                                        <p>{{ $periksa->daftarPoli->pasien->nama }}</p>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-800 dark:text-neutral-400 font-bold">Nama
+                                            Dokter</label>
+                                        <p>{{ $periksa->daftarPoli->jadwal->dokter->nama }}</p>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-800 dark:text-neutral-400 font-bold">Keluhan</label>
+                                        <p>{{ $periksa->daftarPoli->keluhan }}</p>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-800 dark:text-neutral-400 font-bold">Catatan</label>
+                                        <p>{{ $periksa->catatan }}
+                                        </p>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-800 dark:text-neutral-400 font-bold">Obat</label>
+                                        <p>
+                                            @foreach ($periksa->detailPeriksa as $detail)
+                                                <span>{{ $detail->obat->nama_obat }}
+                                                    ({{ $detail->obat->kemasan }})
+                                                </span><br>
+                                            @endforeach
+                                        </p>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-gray-800 dark:text-neutral-400 font-bold">Total
+                                            Biaya</label>
+                                        <p>
+                                            Rp {{ number_format($periksa->biaya_periksa, 0, ',', '.') }}
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+
                             <!-- End Table -->
                         </div>
                     </div>

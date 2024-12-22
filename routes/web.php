@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\KelolaDokter;
 use App\Http\Controllers\Admin\KelolaObat;
 use App\Http\Controllers\Admin\KelolaPasien;
 use App\Http\Controllers\Admin\KelolaPoli;
+use App\Http\Controllers\Dokter\DetailPeriksa;
 use App\Http\Controllers\Dokter\DokterController;
 use App\Http\Controllers\Dokter\JadwalPeriksa;
 use App\Http\Controllers\Dokter\PeriksaPasien;
@@ -102,4 +103,8 @@ Route::middleware(['auth', 'DokterMiddleware'])->group(function () {
     Route::get('/dokter/periksa-pasien', [PeriksaPasien::class, 'index'])->name('dokter.periksa-pasien.index');
     Route::get('/dokter/periksa-pasien/create/{id}', [PeriksaPasien::class, 'create'])->name('dokter.periksa-pasien.create');
     Route::post('/dokter/periksa-pasien', [PeriksaPasien::class, 'save'])->name('dokter.periksa-pasien.save');
+
+    // Riwayat Pasien
+    Route::get('/dokter/riwayat-pasien', [DetailPeriksa::class, 'index'])->name('dokter.riwayat-pasien.index');
+    Route::get('/dokter/riwayat-pasien/{id}', [DetailPeriksa::class, 'show'])->name('dokter.riwayat-pasien.show');
 });
