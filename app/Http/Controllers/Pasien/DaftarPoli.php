@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Pasien\DaftarPoli as PasienDaftarPoli;
 use App\Models\Dokter\JadwalPeriksa;
 use App\Models\Admin\KelolaPoli;
+use App\Models\Dokter\PeriksaPasien;
 use Illuminate\Support\Facades\Auth;
 
 class DaftarPoli extends Controller
@@ -20,6 +21,13 @@ class DaftarPoli extends Controller
             ->where('id_pasien', $user->id) // Filter berdasarkan pasien yang login
             ->orderBy('created_at', 'desc')
             ->get();
+
+        // Tambahkan status berdasarkan data di tabel `periksa`
+        foreach ($daftarPolis as $poli) {
+            $poli->status = PeriksaPasien::where('id_daftar_poli', $poli->id)->exists()
+                ? 'sudah_diperiksa'
+                : 'belum_diperiksa';
+        }
 
         return view('daftar-poli.index', compact('daftarPolis'));
     }
@@ -50,7 +58,6 @@ class DaftarPoli extends Controller
         ]);
     }
 
-
     public function save(Request $request)
     {
         $user = Auth::user(); // Ambil user yang login
@@ -79,6 +86,11 @@ class DaftarPoli extends Controller
     {
         // Ambil data daftar poli berdasarkan ID
         $daftarPoli = PasienDaftarPoli::with(['jadwal.dokter', 'pasien'])->findOrFail($id);
+
+        // Tambahkan status berdasarkan data di tabel `periksa`
+        $daftarPoli->status = PeriksaPasien::where('id_daftar_poli', $daftarPoli->id)->exists()
+            ? 'sudah_diperiksa'
+            : 'belum_diperiksa';
 
         return view('daftar-poli.show', compact('daftarPoli'));
     }

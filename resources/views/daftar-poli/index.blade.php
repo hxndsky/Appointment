@@ -191,45 +191,45 @@ dark:bg-neutral-800 dark:border-neutral-700"
 
                                     </div>
                                 </div>
-                                {{-- 
-                              @if (Session::has('success'))
-                                  <div class="w-full mt-4 bg-teal-100 border border-teal-200 text-sm text-teal-800 rounded-lg p-4 dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500" role="alert" tabindex="-1" aria-labelledby="hs-soft-color-success-label">
-                                      {{ Session::get('success') }}
-                                  </div>
-                              @endif
-                               --}}
                             </div>
 
                             <!-- End Header -->
 
-                            <!-- Table -->
                             <!-- Table -->
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
                                 <thead>
                                     <tr>
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No.</th>
+                                            No.
+                                        </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Nama Poli</th>
+                                            Nama Poli
+                                        </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Nama Dokter</th>
+                                            Nama Dokter
+                                        </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Hari</th>
+                                            Hari
+                                        </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Jam</th>
+                                            Jam
+                                        </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            No. Antrian</th>
+                                            No. Antrian
+                                        </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
-                                            Status</th>
+                                            Status
+                                        </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Aksi
                                         </th>
                                     </tr>
                                 </thead>
@@ -238,45 +238,55 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                         <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $loop->iteration }}</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->jadwal->dokter->poli->nama_poli }}</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->jadwal->dokter->nama }}</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->jadwal->hari }}</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->jadwal->jam_mulai }} - {{ $poli->jadwal->jam_selesai }}</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $poli->no_antrian }}</td>
-                                            <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                @if ($poli->status === 'diproses')
-                                                    <span class="badge bg-success">Diproses</span>
-                                                @else
-                                                    <span class="badge bg-danger">Belum diproses</span>
-                                                @endif
+                                                {{ $loop->iteration }}
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $poli->jadwal->dokter->poli->nama_poli ?? '-' }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $poli->jadwal->dokter->nama ?? '-' }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $poli->jadwal->hari ?? '-' }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $poli->jadwal->jam_mulai ?? '-' }} -
+                                                {{ $poli->jadwal->jam_selesai ?? '-' }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $poli->no_antrian ?? '-' }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                @if ($poli->status === 'sudah_diperiksa')
+                                                    <a
+                                                        class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-100 text-teal-800 focus:outline-none focus:bg-teal-200 disabled:opacity-50 disabled:pointer-events-none dark:text-teal-500 dark:bg-teal-800/30 dark:hover:bg-teal-800/20 dark:focus:bg-teal-800/20">Sudah
+                                                        Diperiksa</a>
+                                                @else
+                                                    <a
+                                                    class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-none focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:bg-red-800/30 dark:hover:bg-red-800/20 dark:focus:bg-red-800/20">Belum
+                                                        Diperiksa</a>
+                                                @endif
+                                            </td>
+
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
                                                 <div class="flex gap-2">
-                                                    <!-- Trigger modal -->
-                                                    <button
-                                                        class="py-2 px-4 inline-flex items-center text-sm font-medium rounded-lg border bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20"
-                                                        data-modal-toggle="modal-{{ $poli->id }}">
+                                                    <a href="{{ route('daftar-poli.show', $poli->id) }}"
+                                                        class="py-2 px-4 inline-flex items-center text-sm font-medium rounded-lg border bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20">
                                                         Detail
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                                            <td colspan="6"
+                                            <td colspan="8"
                                                 class="px-6 py-4 text-center text-sm font-medium text-gray-800 dark:text-neutral-200">
                                                 Belum ada riwayat pendaftaran.
                                             </td>
@@ -284,41 +294,13 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                     @endforelse
                                 </tbody>
                             </table>
+
                             <!-- End Table -->
                         </div>
                     </div>
                 </div>
             </div>
             <!-- End Card -->
-
-            <!-- Modal Structure (Hidden initially) -->
-            @foreach ($daftarPolis as $poli)
-                <div id="modal-{{ $poli->id }}"
-                    class="fixed inset-0 flex items-center justify-center z-50 hidden">
-                    <div class="bg-white text-center p-8 rounded-lg shadow-xl dark:bg-neutral-800 max-w-xl w-full h-auto">
-                        <h1 class="text-2xl mb-8 font-semibold text-gray-800 dark:text-neutral-200">Detail Daftar Poli</h1>
-                        <p class="mb-4"><strong>No. Rekam Medis:</strong><br> {{ $poli->pasien->no_rm }}</p>
-                        <p class="mb-4"><strong>Nama Poli:</strong><br> {{ $poli->jadwal->dokter->poli->nama_poli }}</p>
-                        <p class="mb-4"><strong>Nama Dokter:</strong><br> {{ $poli->jadwal->dokter->nama }}</p>
-                        <p class="mb-4"><strong>Hari:</strong><br> {{ $poli->jadwal->hari }}</p>
-                        <p class="mb-4"><strong>Jam:</strong><br> {{ $poli->jadwal->jam_mulai }} - {{ $poli->jadwal->jam_selesai }}</p>
-                        <p class="mb-4"><strong>No. Antrian:</strong><br> {{ $poli->no_antrian }}</p>
-                        <p class="mb-4"><strong>Status:</strong><br>
-                            @if ($poli->status === 'diproses')
-                                <span class="badge bg-success">Diproses</span>
-                            @else
-                                <span class="badge bg-danger">Belum diproses</span>
-                            @endif
-                        </p>
-                        <p class="mb-4"><strong>Keluhan:</strong><br> {{ $poli->keluhan }}</p>
-                        <div class="flex justify-end">
-                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg"
-                                onclick="document.getElementById('modal-{{ $poli->id }}').classList.add('hidden')">Tutup</button>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-
         </div>
     </div>
 @endsection

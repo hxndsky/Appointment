@@ -158,7 +158,6 @@ dark:bg-neutral-800 dark:border-neutral-700"
                             <div class="p-4 overflow-y-auto">
                                 <form action="{{ route('daftar-poli.save') }}" method="POST">
                                     @csrf
-
                                     <div class="mb-4">
                                         <label class="block text-gray-800 dark:text-neutral-400 font-bold">No. Rekam
                                             Medis</label>
@@ -196,10 +195,10 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                     <div class="mb-4">
                                         <label class="block text-gray-800 dark:text-neutral-400 font-bold">Status</label>
                                         <p>
-                                            @if ($daftarPoli->status === 'diproses')
-                                                <span class="badge bg-success">Diproses</span>
+                                            @if ($daftarPoli->status === 'sudah_diperiksa')
+                                                <span class="badge bg-success">Sudah Diperiksa</span>
                                             @else
-                                                <span class="badge bg-danger">Belum diproses</span>
+                                                <span class="badge bg-danger">Belum diperiksa</span>
                                             @endif
                                         </p>
                                     </div>

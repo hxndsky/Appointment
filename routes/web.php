@@ -40,8 +40,7 @@ Route::middleware(['auth', 'PasienMiddleware'])->group(function () {
     Route::get('/daftar-poli', [DaftarPoli::class, 'index'])->name('daftar-poli.index');
     Route::get('/daftar-poli/create', [DaftarPoli::class, 'create'])->name('daftar-poli.create');
     Route::post('/daftar-poli', [DaftarPoli::class, 'save'])->name('daftar-poli.save');
-    //Route::get('/daftar-poli/{id}/detail', [DaftarPoli::class, 'show'])->name('daftar-poli.show');
-
+    Route::get('/daftar-poli/{id}', [DaftarPoli::class, 'show'])->name('daftar-poli.show');
 });
 
 // ADMIN ROUTES
