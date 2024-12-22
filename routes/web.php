@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\KelolaPasien;
 use App\Http\Controllers\Admin\KelolaPoli;
 use App\Http\Controllers\Dokter\DokterController;
 use App\Http\Controllers\Dokter\JadwalPeriksa;
+use App\Http\Controllers\Dokter\PeriksaPasien;
 use App\Http\Controllers\Dokter\ProfileDokter;
 use App\Http\Controllers\Pasien\DaftarPoli;
 //use App\Http\Controllers\ProfileController;
@@ -97,4 +98,9 @@ Route::middleware(['auth', 'DokterMiddleware'])->group(function () {
     Route::get('/dokter/jadwal-periksa/edit/{id}', [JadwalPeriksa::class, 'edit'])->name('dokter.jadwal-periksa.edit');
     Route::put('/dokter/jadwal-periksa/edit/{id}', [JadwalPeriksa::class, 'update'])->name('dokter.jadwal-periksa.update');
     Route::get('/dokter/jadwal-periksa/delete/{id}', [JadwalPeriksa::class, 'delete'])->name('dokter.jadwal-periksa.delete');
+
+    // Periksa Pasien
+    Route::get('/dokter/periksa-pasien', [PeriksaPasien::class, 'index'])->name('dokter.periksa-pasien.index');
+    Route::get('/dokter/periksa-pasien/create/{id}', [PeriksaPasien::class, 'create'])->name('dokter.periksa-pasien.create');
+    Route::post('/dokter/periksa-pasien', [PeriksaPasien::class, 'save'])->name('dokter.periksa-pasien.save');
 });

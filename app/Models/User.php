@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Admin\KelolaDokter;
+use App\Models\Pasien\DaftarPoli;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,7 +22,7 @@ class User extends Authenticatable
      */
 
     protected $table = 'pasien';
-    
+
     protected $fillable = [
         'nama',
         'email',
@@ -53,5 +55,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function daftarPoli()
+    {
+        return $this->hasMany(DaftarPoli::class, 'id_pasien');
+    }
+
+    public function dokter()
+    {
+        return $this->hasOne(KelolaDokter::class, 'email', 'email'); // Hubungkan berdasarkan email
     }
 }

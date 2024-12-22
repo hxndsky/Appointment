@@ -1,6 +1,6 @@
 @extends('layouts.app')
 <!-- DOKTER -->
-@section('title', 'Edit Jadwal Periksa')
+@section('title', 'Periksa Pasien')
 @section('content')
     <!-- Breadcrumb -->
     <div
@@ -33,7 +33,7 @@
                     </svg>
                 </li>
                 <li class="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                    Jadwal Periksa
+                    Periksa Pasien
                 </li>
             </ol>
             <!-- End Breadcrumb -->
@@ -200,64 +200,83 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Edit Jadwal Periksa
+                                        Periksa Pasien
                                     </h2>
-                                    @if (Session::has('error'))
-                                        <div class="mt-2 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
-                                            role="alert" tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
-                                            {{ Session::get('error') }}
-                                        </div>
-                                    @endif
                                 </div>
-
-
                             </div>
+
                             <!-- End Header -->
 
                             <!-- Table -->
                             <div class="p-4 overflow-y-auto">
-                                <form action="{{ route('dokter.jadwal-periksa.update', $jadwal->id) }}" method="POST">
+                                <form id="periksaForm" action="{{ route('dokter.periksa-pasien.save') }}" method="POST">
                                     @csrf
-                                    @method('PUT')
 
-                                    <!-- Hari -->
+                                    <!-- Hidden Input -->
+                                    <input type="hidden" name="id_daftar_poli" value="{{ $daftarPoli->id }}">
+
+                                    <!-- Nama Pasien -->
                                     <div class="mb-4">
-                                        <label for="hari" class="block text-gray-800 dark:text-neutral-400">Hari</label>
-                                        <input type="text" id="hari" name="hari"
-                                            value="{{ old('hari', $jadwal->hari) }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Hari" required>
+                                        <label for="nama_pasien" class="block text-gray-800 dark:text-neutral-400">Nama
+                                            Pasien</label>
+                                        <input type="text" id="nama_pasien" name="nama_pasien"
+                                            value="{{ $daftarPoli->pasien->nama }}" readonly
+                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                     </div>
 
-                                    <!-- Jam Mulai -->
+                                    <!-- Tanggal Periksa -->
                                     <div class="mb-4">
-                                        <label for="jam_mulai"
-                                            class="block text-gray-800 dark:text-neutral-400">Jam Mulai</label>
-                                        <input type="time" id="jam_mulai" name="jam_mulai"
-                                            value="{{ old('jam_mulai', $jadwal->jam_mulai) }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Jam Mulai" required>
+                                        <label for="tgl_periksa" class="block text-gray-800 dark:text-neutral-400">Tanggal
+                                            Periksa</label>
+                                        <input type="date" id="tgl_periksa" name="tgl_periksa" required
+                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                                     </div>
 
-                                    <!-- Jam Selesai -->
+                                    <!-- Obat -->
                                     <div class="mb-4">
-                                        <label for="jam_selesai" class="block text-gray-800 dark:text-neutral-400">Jam Selesai</label>
-                                        <input type="time" id="jam_selesai" name="jam_selesai"
-                                            value="{{ old('jam_selesai', $jadwal->jam_selesai) }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Jam Selesai" required>
-                                    </div>
-
-                                    <!-- Buttons -->
-                                    <div class="flex justify-end items-center gap-x-2 px-4">
-                                        <a href="{{ route('dokter.jadwal-periksa.index') }}"
-                                            class="py-2 px-3 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700">
-                                            Kembali
-                                        </a>
-                                        <button type="submit"
-                                            class="py-2 px-3 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50">
-                                            Simpan
+                                        <label class="block text-gray-800 dark:text-neutral-400">Pilih
+                                            Obat</label>
+                                        <div id="selectedObatContainer" class="space-y-2">
+                                            <!-- Obat Terpilih akan muncul di sini -->
+                                        </div>
+                                        <select id="obatSelect"
+                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
+                                            <option value="" disabled selected>Pilih Obat</option>
+                                            @foreach ($obatList as $obat)
+                                                <option value="{{ $obat->id }}" data-harga="{{ $obat->harga }}">
+                                                    {{ $obat->nama_obat }} -
+                                                    Rp{{ number_format($obat->harga, 0, ',', '.') }}</option>
+                                            @endforeach
+                                        </select>
+                                        <button type="button" id="addObatBtn"
+                                            class="mt-2 px-3 py-1 text-sm text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            Tambahkan Obat
                                         </button>
+                                    </div>
+
+                                    <!-- Catatan -->
+                                    <div class="mb-4">
+                                        <label for="catatan"
+                                            class="block text-gray-800 dark:text-neutral-400">Catatan</label>
+                                        <textarea id="catatan" name="catatan" rows="4" required
+                                            class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"></textarea>
+                                    </div>
+
+                                    <!-- Total Biaya -->
+                                    <div class="mb-4">
+                                        <label class="block text-gray-800 dark:text-neutral-400">Total
+                                            Biaya</label>
+                                        <p id="totalBiaya"
+                                            class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">Rp150.000</p>
+                                        <input type="hidden" name="total_biaya" id="hiddenTotalBiaya" value="150000">
+                                    </div>
+
+                                    <!-- Submit -->
+                                    <div class="flex justify-end gap-2">
+                                        <a href="{{ route('dokter.periksa-pasien.index') }}"
+                                            class="py-2 px-4 text-sm font-medium border bg-white text-gray-800 rounded-lg">Kembali</a>
+                                        <button type="submit"
+                                            class="py-2 px-4 text-sm font-medium text-white bg-blue-600 rounded-lg">Simpan</button>
                                     </div>
                                 </form>
                             </div>

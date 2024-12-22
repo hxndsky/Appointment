@@ -2,7 +2,9 @@
 
 namespace App\Models\Pasien;
 
+use App\Models\Admin\KelolaDokter;
 use App\Models\Dokter\JadwalPeriksa;
+use App\Models\Dokter\PeriksaPasien;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,13 +22,19 @@ class DaftarPoli extends Model
         'no_antrian',
     ];
 
+    public function jadwal()
+    {
+        return $this->belongsTo(JadwalPeriksa::class, 'id_jadwal');
+    }
+
     public function pasien()
     {
         return $this->belongsTo(User::class, 'id_pasien');
     }
 
-    public function jadwal()
-    {
-        return $this->belongsTo(JadwalPeriksa::class, 'id_jadwal');
-    }
+    public function periksa()
+{
+    return $this->hasOne(PeriksaPasien::class, 'id_daftar_poli');
+}
+
 }

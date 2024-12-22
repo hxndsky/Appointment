@@ -218,15 +218,61 @@
         });
     </script>
 
-<script>
-    // Toggle modal visibility
-    document.querySelectorAll('[data-modal-toggle]').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const modalId = e.target.getAttribute('data-modal-toggle');
-            document.getElementById(modalId).classList.remove('hidden');
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const biayaDasar = 150000;
+            let totalBiaya = biayaDasar;
+
+            const obatSelect = document.getElementById("obatSelect");
+            const addObatBtn = document.getElementById("addObatBtn");
+            const selectedObatContainer = document.getElementById("selectedObatContainer");
+            const totalBiayaElement = document.getElementById("totalBiaya");
+            const hiddenTotalBiaya = document.getElementById("hiddenTotalBiaya");
+
+            const selectedObatIds = new Set();
+
+            addObatBtn.addEventListener("click", () => {
+                const selectedOption = obatSelect.options[obatSelect.selectedIndex];
+                const obatId = selectedOption.value;
+                const obatName = selectedOption.textContent;
+                const obatHarga = parseInt(selectedOption.dataset.harga);
+
+                if (!obatId || selectedObatIds.has(obatId)) return;
+
+                selectedObatIds.add(obatId);
+                totalBiaya += obatHarga;
+
+                // Tambahkan Obat ke List
+                const obatItem = document.createElement("div");
+                obatItem.classList.add("flex", "items-center", "justify-between", "p-2", "border",
+                    "rounded-md", "bg-gray-100", "dark:bg-neutral-700", "text-gray-800",
+                    "dark:text-white");
+                obatItem.innerHTML = `
+                <input type="hidden" name="obat[]" value="${obatId}">
+                <span>${obatName}</span>
+                <button type="button" class="removeObatBtn px-2 py-1 text-sm text-red-600 hover:text-red-800 focus:outline-none">Hapus</button>
+            `;
+                selectedObatContainer.appendChild(obatItem);
+
+                // Update Total Biaya
+                updateTotalBiaya();
+
+                // Hapus Obat
+                obatItem.querySelector(".removeObatBtn").addEventListener("click", () => {
+                    selectedObatIds.delete(obatId);
+                    totalBiaya -= obatHarga;
+                    obatItem.remove();
+                    updateTotalBiaya();
+                });
+            });
+
+            function updateTotalBiaya() {
+                totalBiayaElement.textContent = `Rp${new Intl.NumberFormat('id-ID').format(totalBiaya)}`;
+                hiddenTotalBiaya.value = totalBiaya;
+            }
         });
-    });
-  </script>
+    </script>
+
 
     <script>
         window.addEventListener("load", () => {

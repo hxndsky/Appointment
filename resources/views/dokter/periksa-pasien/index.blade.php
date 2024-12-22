@@ -1,6 +1,6 @@
 @extends('layouts.app')
 <!-- DOKTER -->
-@section('title', 'Edit Jadwal Periksa')
+@section('title', 'Periksa Pasien')
 @section('content')
     <!-- Breadcrumb -->
     <div
@@ -33,7 +33,7 @@
                     </svg>
                 </li>
                 <li class="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                    Jadwal Periksa
+                    Periksa Pasien
                 </li>
             </ol>
             <!-- End Breadcrumb -->
@@ -200,67 +200,118 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                        Edit Jadwal Periksa
+                                        Periksa Pasien
                                     </h2>
-                                    @if (Session::has('error'))
-                                        <div class="mt-2 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500"
-                                            role="alert" tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
-                                            {{ Session::get('error') }}
-                                        </div>
-                                    @endif
+                                    <p class="text-sm text-gray-600 dark:text-neutral-400">
+                                        List pasien yang perlu di periksa
+                                    </p>
+
                                 </div>
 
-
+                                <div>
+                                    <div class="py-3 px-4 inline-flex gap-x-2">
+                                        <form action="{{ route('dokter.periksa-pasien.index') }}" method="GET">
+                                            <div class="relative max-w-xs w-full">
+                                                <label for="hs-table-search" class="sr-only">Search</label>
+                                                <input type="text" name="search" id="hs-table-search"
+                                                    class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                    placeholder="Cari Periksa Pasien..." value="{{ request('search') }}">
+                                                <div
+                                                    class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
+                                                    <svg class="size-4 text-gray-400 dark:text-neutral-500"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <circle cx="11" cy="11" r="8"></circle>
+                                                        <path d="m21 21-4.3-4.3"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
+
                             <!-- End Header -->
 
                             <!-- Table -->
-                            <div class="p-4 overflow-y-auto">
-                                <form action="{{ route('dokter.jadwal-periksa.update', $jadwal->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-
-                                    <!-- Hari -->
-                                    <div class="mb-4">
-                                        <label for="hari" class="block text-gray-800 dark:text-neutral-400">Hari</label>
-                                        <input type="text" id="hari" name="hari"
-                                            value="{{ old('hari', $jadwal->hari) }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Hari" required>
-                                    </div>
-
-                                    <!-- Jam Mulai -->
-                                    <div class="mb-4">
-                                        <label for="jam_mulai"
-                                            class="block text-gray-800 dark:text-neutral-400">Jam Mulai</label>
-                                        <input type="time" id="jam_mulai" name="jam_mulai"
-                                            value="{{ old('jam_mulai', $jadwal->jam_mulai) }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Jam Mulai" required>
-                                    </div>
-
-                                    <!-- Jam Selesai -->
-                                    <div class="mb-4">
-                                        <label for="jam_selesai" class="block text-gray-800 dark:text-neutral-400">Jam Selesai</label>
-                                        <input type="time" id="jam_selesai" name="jam_selesai"
-                                            value="{{ old('jam_selesai', $jadwal->jam_selesai) }}"
-                                            class="mt-2 px-4 py-2 w-full border border-gray-200 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white"
-                                            placeholder="Jam Selesai" required>
-                                    </div>
-
-                                    <!-- Buttons -->
-                                    <div class="flex justify-end items-center gap-x-2 px-4">
-                                        <a href="{{ route('dokter.jadwal-periksa.index') }}"
-                                            class="py-2 px-3 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700">
-                                            Kembali
-                                        </a>
-                                        <button type="submit"
-                                            class="py-2 px-3 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50">
-                                            Simpan
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            No.
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Nama Pasien
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Keluhan
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Jadwal
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            No. Antrian
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">
+                                            Aksi
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                                    @forelse ($daftarPoli as $item)
+                                        <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $loop->iteration }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $item->pasien->nama }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $item->keluhan }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $item->jadwal->hari }},
+                                                {{ \Carbon\Carbon::parse($item->jadwal->jam_mulai)->format('H:i') }} -
+                                                {{ \Carbon\Carbon::parse($item->jadwal->jam_selesai)->format('H:i') }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                {{ $item->no_antrian }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                @if (!$item->periksa)
+                                                    <a href="{{ route('dokter.periksa-pasien.create', $item->id) }}"
+                                                        class="py-2 px-4 inline-flex items-center text-sm font-medium rounded-lg border bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20">
+                                                        Periksa
+                                                    </a>
+                                                @else
+                                                    <a class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-100 text-teal-800 focus:outline-none focus:bg-teal-200 disabled:opacity-50 disabled:pointer-events-none dark:text-teal-500 dark:bg-teal-800/30 dark:hover:bg-teal-800/20 dark:focus:bg-teal-800/20">
+                                                        Sudah Diperiksa
+                                                    </a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="7" class="text-center p-3 text-gray-500">
+                                                Tidak ada pasien untuk diperiksa.
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
 
                             <!-- End Table -->
                         </div>
