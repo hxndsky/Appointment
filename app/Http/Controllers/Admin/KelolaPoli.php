@@ -10,7 +10,7 @@ class KelolaPoli extends Controller
 {
     public function index(Request $request)
     {
-        $polis = AdminKelolaPoli::orderBy('id', 'desc')->get();
+        $polis = AdminKelolaPoli::orderBy('id', 'asc')->get();
         $total = AdminKelolaPoli::count();
         return view('admin.kelola-poli.index', compact(['polis', 'total']));
     }

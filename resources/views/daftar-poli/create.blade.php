@@ -214,7 +214,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        @endif
+                                        
 
                                         <!-- Keluhan -->
                                         <div class="mb-4">
@@ -222,6 +222,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                             <textarea id="keluhan" name="keluhan" class="mt-2 px-4 py-2 w-full border border-gray-300 rounded-lg"
                                                 rows="4" placeholder="Masukkan keluhan" required>{{ old('keluhan') }}</textarea>
                                         </div>
+                                        @endif
 
                                         <!-- Tombol Aksi -->
                                         <div class="flex justify-end gap-2">

@@ -618,8 +618,7 @@ dark:bg-neutral-800 dark:border-neutral-700"
                                 <!-- Display Info -->
                                 <div class="text-sm text-gray-600 dark:text-neutral-400">
                                     Menampilkan
-                                    {{ ($polis->currentPage() - 1) * $polis->perPage() + 1 }}-
-                                    {{ min($polis->currentPage() * $polis->perPage(), $polis->total()) }}
+                                    {{ ($polis->currentPage() - 1) * $polis->perPage() + 1 }}-{{ min($polis->currentPage() * $polis->perPage(), $polis->total()) }}
                                     dari {{ $polis->total() }} data
                                 </div>
 
