@@ -75,6 +75,9 @@ class KelolaDokter extends Controller
         // Temukan data dokter berdasarkan ID
         $dokters = AdminKelolaDokter::findOrFail($id);
 
+        // Simpan email lama untuk sinkronisasi dengan tabel pasien
+        $oldEmail = $dokters->email;
+
         // Validasi input
         $validated = $request->validate([
             'nama' => 'required|max:150',
@@ -87,7 +90,7 @@ class KelolaDokter extends Controller
 
         // Hash password jika diberikan
         if ($request->filled('password')) {
-            $validated['password'] = Hash::make($validated['password']);
+            $validated['password'] = Hash::make($request->password);
         } else {
             unset($validated['password']);
         }
@@ -96,10 +99,11 @@ class KelolaDokter extends Controller
         $updatedDokter = $dokters->update($validated);
 
         // Sinkronisasi data pada tabel pasien
-        $pasiens = User::where('email', $dokters->email)->first();
+        $pasiens = User::where('email', $oldEmail)->first(); // Gunakan email lama
         if ($pasiens) {
             $pasiens->update([
                 'nama' => $validated['nama'],
+                'email' => $validated['email'], // Perbarui email baru
                 'alamat' => $validated['alamat'],
                 'no_hp' => $validated['no_hp'],
                 'password' => $validated['password'] ?? $pasiens->password, // Perbarui password jika diisi
@@ -115,6 +119,7 @@ class KelolaDokter extends Controller
 
         return redirect()->route('admin.kelola-dokter.index');
     }
+
 
 
     public function delete($id)

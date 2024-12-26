@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileDokter extends Controller
 {
-    /**
-     * Tampilkan halaman profil dokter.
-     */
     public function profile()
     {
         $dokter = KelolaDokter::where('email', Auth::user()->email)->firstOrFail();
@@ -21,9 +18,6 @@ class ProfileDokter extends Controller
         return view('dokter.profile.edit', compact('dokter', 'polis'));
     }
 
-    /**
-     * Perbarui profil dokter.
-     */
     public function update(Request $request)
     {
         // Cari data dokter berdasarkan email pengguna yang sedang login
@@ -46,25 +40,30 @@ class ProfileDokter extends Controller
             unset($validated['password']);
         }
 
+        // Simpan email lama untuk pencarian di tabel pasien
+        $oldEmail = $dokter->email;
+
         // Update data di tabel dokter
         $dokter->update($validated);
 
-        // Update data di tabel pasien (untuk autentikasi)
-        $pasien = User::where('email', $dokter->email)->first();
+        // Update data di tabel pasien
+        $pasien = User::where('email', $oldEmail)->first(); // Cari data pasien berdasarkan email lama
         if ($pasien) {
             $pasienData = [
                 'nama' => $validated['nama'],
-                'email' => $validated['email'],
+                'email' => $validated['email'], // Pastikan email diperbarui
                 'alamat' => $validated['alamat'],
                 'no_hp' => $validated['no_hp'],
-                'role' => 'Dokter',
+                'role' => 'Dokter', // Pastikan role tetap sebagai 'Dokter'
+                'no_ktp' => $pasien->no_ktp ?? 0, // Tetapkan nilai default untuk no_ktp
             ];
 
-            // Update password jika ada perubahan
+            // Update password di tabel pasien jika diisi
             if ($request->filled('password')) {
                 $pasienData['password'] = $validated['password'];
             }
 
+            // Perbarui data pasien
             $pasien->update($pasienData);
         }
 

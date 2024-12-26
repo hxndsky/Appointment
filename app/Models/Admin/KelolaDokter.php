@@ -30,9 +30,6 @@ class KelolaDokter extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * Hubungan dengan Poli.
-     */
     public function poli()
     {
         return $this->belongsTo(KelolaPoli::class, 'id_poli');
