@@ -116,9 +116,10 @@
                 </h1>
                 <div class="max-w-4xl">
                     <p class="mt-5 text-neutral-400 text-lg">
-                        It is a creative hub where imagination meets craftsmanship to transform ideas into tangible
-                        realities. At Preline Agency, we specialize in turning conceptual visions into concrete forms,
-                        whether it be through design, artistry, or technological innovation.
+                        Poliklinik kami adalah pusat layanan kesehatan yang menghubungkan kebutuhan Anda dengan keahlian
+                        medis terbaik, menciptakan solusi kesehatan yang nyata. Di Poliklinik, kami mengutamakan
+                        kemudahan dalam membuat janji periksa dengan dokter pilihan Anda, memastikan setiap kebutuhan
+                        kesehatan ditangani secara profesional.
                     </p>
                 </div>
             </div>
@@ -131,8 +132,8 @@
                 <!-- Title -->
                 <div class="max-w-3xl mb-10 lg:mb-14">
                     <h2 class="text-blue-600 font-semibold text-2xl md:text-4xl md:leading-tight">Testimoni</h2>
-                    <p class="mt-1 text-neutral-400">With over 30 awards, and achievements, we proudly demonstrate our
-                        unwavering dedication to excellence and client success.</p>
+                    <p class="mt-1 text-neutral-400">Dengan dedikasi penuh terhadap kesehatan pasien, kami bangga
+                        memberikan pelayanan terbaik yang telah dipercaya oleh banyak pasien kami.</p>
                 </div>
                 <!-- End Title -->
 
@@ -143,8 +144,8 @@
                         <blockquote>
                             <p
                                 class="font-medium text-xl text-black md:text-2xl md:leading-normal xl:text-3xl xl:leading-normal">
-                                To say that switching to Preline has been life-changing is an understatement. My
-                                business has tripled since then.
+                                Pelayanan di Poliklinik sangat ramah dan profesional. Semua kebutuhan kesehatan
+                                saya ditangani dengan baik dan cepat.
                             </p>
 
                             <footer class="mt-6">
@@ -155,8 +156,8 @@
                                             alt="Image Description">
                                     </div>
                                     <div class="ms-4 md:ms-0">
-                                        <div class="text-base font-semibold text-blue-600">Nicole Grazioso</div>
-                                        <div class="text-xs text-neutral-400">Director Payments & Risk | Airbnb</div>
+                                        <div class="text-base font-semibold text-blue-600">Andi Wijaya</div>
+                                        <div class="text-xs text-neutral-400">Pasien | Poliklinik</div>
                                     </div>
                                 </div>
                             </footer>
@@ -167,7 +168,7 @@
 
                     <div class="hidden md:block mb-24 md:mb-0">
                         <img class="rounded-xl"
-                            src="https://images.unsplash.com/photo-1671725501928-b7d85698ccd8?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            src="https://img.freepik.com/free-photo/coronavirus-sample-procedure_23-2148709151.jpg?ga=GA1.1.1329671110.1727766585&semt=ais_hybrid"
                             alt="Image Description">
                     </div>
                     <!-- End Col -->
@@ -291,7 +292,7 @@
                                 <p class="mt-5">
                                     <a class="group inline-flex items-center gap-x-2 py-2 px-3 bg-blue-600 font-medium text-sm text-white rounded-full focus:outline-none"
                                         href="#">
-                                        Submit
+                                        Kirim
                                         <svg class="flex-shrink-0 size-4 transition group-hover:translate-x-0 group-focus:translate-x-0.5 "
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -342,7 +343,7 @@
 
                                 <a class="mt-1 text-neutral-400 text-sm" href="#mailto:example@site.co"
                                     target="_blank">
-                                    hello@email.com
+                                    poliklinik@email.com
                                 </a>
                             </div>
                         </div>
