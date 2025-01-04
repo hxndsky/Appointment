@@ -11,9 +11,9 @@ cd appointment
 ```
 composer require laravel/breeze --dev
 php artisan breeze:install
+copy file github yg di download tadi
 php artisan migrate
 npm install
-npm run dev
 ```
 4. Cek isi package.json lalu pastikan isi "devDependencies" sama dengan ini:
 ```
@@ -40,7 +40,7 @@ DB_PASSWORD=adminroot (kosongkan jika db tidak menggunakan password)
 ```
 6. Ganti APP_URL pada .env
 ```
-http://localhost:8000
+http://localhost
 ```
 7. Run app
 ```
